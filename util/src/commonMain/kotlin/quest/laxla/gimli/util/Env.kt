@@ -20,7 +20,7 @@ public var environment: ImmutableMap<String, String> = fetchEnvironmentVariables
  *
  * @see environment
  */
-public val env: ReadOnlyProperty<String, String?> = ReadOnlyProperty { _, property ->
+public val env: ReadOnlyProperty<Nothing?, String?> = ReadOnlyProperty { _, property ->
     environment[property.name.replace(uppercaseRegex) {
         it.groups[lowercase]!!.value + '_' + it.groups[uppercase]!!.value
     }.uppercase()]
@@ -31,7 +31,7 @@ public val env: ReadOnlyProperty<String, String?> = ReadOnlyProperty { _, proper
  *
  * @see environment
  */
-public fun env(default: String): ReadOnlyProperty<String, String> = ReadOnlyProperty { thisRef, property ->
+public fun env(default: String): ReadOnlyProperty<Nothing?, String> = ReadOnlyProperty { thisRef, property ->
     env.getValue(thisRef, property) ?: default
 }
 

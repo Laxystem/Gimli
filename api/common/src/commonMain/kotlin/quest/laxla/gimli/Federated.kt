@@ -8,8 +8,8 @@ package quest.laxla.gimli
 @MustBeDocumented
 @Retention(AnnotationRetention.SOURCE)
 @Target(AnnotationTarget.PROPERTY, AnnotationTarget.PROPERTY_SETTER)
-annotation class Federated(val fallback: Fallback = Fallback.Default) {
-    enum class Fallback {
+public annotation class Federated(val fallback: Fallback = Fallback.Default) {
+    public enum class Fallback {
         /**
          * The property will fall back to its default value.
          *

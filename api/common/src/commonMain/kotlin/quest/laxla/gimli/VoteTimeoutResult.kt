@@ -1,10 +1,10 @@
 package quest.laxla.gimli
 
-enum class VoteTimeoutResult {
+public enum class VoteTimeoutResult {
     ForceSuccess, Evaluate, ForceFailure;
 
-    companion object {
-        fun of(voteTimeoutResult: Boolean?) = when(voteTimeoutResult) {
+    public companion object {
+        public fun of(voteTimeoutResult: Boolean?): VoteTimeoutResult = when(voteTimeoutResult) {
             true -> ForceSuccess
             null -> Evaluate
             false -> ForceFailure

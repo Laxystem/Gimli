@@ -1,12 +1,14 @@
 package quest.laxla.gimli
 
-interface Permission {
-    val identifier: String
-    val appliesToGuilds: Boolean
-    val appliesToProfiles: Boolean
-    val appliesToRailways: Boolean
+import quest.laxla.gimli.util.Maybe
 
-    enum class BuiltIn(
+public interface Permission { // TODO: turn into a proper element?
+    public val identifier: String
+    public val appliesToGuilds: Maybe
+    public val appliesToProfiles: Maybe
+    public val appliesToRailways: Maybe
+
+    public enum class BuiltIn(
         override val appliesToProfiles: Boolean = true,
         override val appliesToGuilds: Boolean = true,
         override val appliesToRailways: Boolean = true
@@ -57,6 +59,6 @@ interface Permission {
          */
         Mention;
 
-        override val identifier: String = "https://gimli.laxla.quest#permission/$name"
+        override val identifier: String get() = "https://gimli.laxla.quest#permission/$name"
     }
 }
