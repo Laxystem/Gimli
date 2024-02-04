@@ -11,10 +11,10 @@ import kotlin.jvm.JvmName
  * @see Flow
  * @see Result
  */
-typealias CatchingFlow<T> = Flow<Result<T>>
-typealias CatchingFlowCollector<T> = FlowCollector<Result<T>>
+public typealias CatchingFlow<T> = Flow<Result<T>>
+public typealias CatchingFlowCollector<T> = FlowCollector<Result<T>>
 
-val DefaultFailureHandlingLevel = Level.WARN
+private val DefaultFailureHandlingLevel = Level.WARN
 
 /**
  * Logs then discards failures, unboxing successes.
@@ -22,7 +22,7 @@ val DefaultFailureHandlingLevel = Level.WARN
  * @see filterFailures
  * @see Result
  */
-fun <T> CatchingFlow<T>.handleFailures(logger: KLogger, level: Level = DefaultFailureHandlingLevel) =
+public fun <T> CatchingFlow<T>.handleFailures(logger: KLogger, level: Level = DefaultFailureHandlingLevel): Flow<T> =
     transform { result ->
         result.fold(
             onSuccess = { emit(it) },
@@ -41,35 +41,39 @@ fun <T> CatchingFlow<T>.handleFailures(logger: KLogger, level: Level = DefaultFa
  * @see handleFailures
  * @see Result
  */
-fun <T> CatchingFlow<T>.filterFailures() = transform { result -> result.onSuccess { emit(it) } }
+public fun <T> CatchingFlow<T>.filterFailures(): Flow<T> = transform { result -> result.onSuccess { emit(it) } }
 
 /**
  * Creates a [CatchingFlow], catching any exceptions thrown and adding them to the result.
  */
-inline fun <R> flowCatching(crossinline block: suspend CatchingFlowCollector<R>.() -> Unit): CatchingFlow<R> = flow {
-    try {
-        block()
-    } catch (e: Throwable) {
-        emit(e)
+public inline fun <R> flowCatching(crossinline block: suspend CatchingFlowCollector<R>.() -> Unit): CatchingFlow<R> =
+    flow {
+        try {
+            block()
+        } catch (e: Throwable) {
+            emit(e)
+        }
     }
-}
-
 
 
 /**
  * [Emit][FlowCollector.emit]s a value, wrapping it with a successful [Result].
  */
-suspend fun <T> CatchingFlowCollector<T>.emit(value: T) = emit(Result.success(value))
+public suspend fun <T> CatchingFlowCollector<T>.emit(value: T) {
+    emit(Result.success(value))
+}
 
 /**
  * [Emit][FlowCollector.emit] a failure.
  */
-suspend fun <T> CatchingFlowCollector<T>.emit(exception: Throwable) = emit(Result.failure(exception))
+public suspend fun <T> CatchingFlowCollector<T>.emit(exception: Throwable) {
+    emit(Result.failure(exception))
+}
 
 /**
  * Creates a [CatchingFlow] that produces values from the specified `vararg`-arguments.
  */
-fun <T> catchingFlowOf(vararg elements: T): CatchingFlow<T> = flowCatching {
+public fun <T> catchingFlowOf(vararg elements: T): CatchingFlow<T> = flow {
     for (element in elements) {
         emit(element)
     }
@@ -78,55 +82,53 @@ fun <T> catchingFlowOf(vararg elements: T): CatchingFlow<T> = flowCatching {
 /**
  * Creates a [CatchingFlow] that produces [failures] from the specified `vararg`-arguments.
  */
-fun <T> catchingFlowOf(vararg failures: Throwable): CatchingFlow<T> = flowCatching {
-    for (element in failures) {
-        emit(element)
+public fun <T> catchingFlowOf(vararg failures: Throwable): CatchingFlow<T> = flow {
+    for (failure in failures) {
+        emit(failure)
     }
 }
 
 /**
  * Creates a [CatchingFlow] that produces the given [value].
  */
-fun <T> catchingFlowOf(value: T): CatchingFlow<T> = flowCatching {
-    emit(value)
-}
+public fun <T> catchingFlowOf(value: T): CatchingFlow<T> = flow { emit(value) }
 
 /**
  * Creates a [CatchingFlow] that produces the given [failure].
  */
-fun <T> catchingFlowOf(failure: Throwable): CatchingFlow<T> = flowCatching {
+public fun <T> catchingFlowOf(failure: Throwable): CatchingFlow<T> = flow {
     emit(failure)
 }
 
 /**
  * Turns this [Flow] into a [CatchingFlow].
  */
-fun <T> Flow<T>.catching() = map(Result.Companion::success)
+public fun <T> Flow<T>.catching(): Flow<Result<T>> = map(Result.Companion::success)
 
-fun <T> (() -> T).asFlowCatching() = flowCatching {
+public fun <T> (() -> T).asFlowCatching(): Flow<Result<T>> = flowCatching {
     emit(invoke())
 }
 
-fun <T> (suspend () -> T).asFlowCatching() = flowCatching {
+public fun <T> (suspend () -> T).asFlowCatching(): Flow<Result<T>> = flowCatching {
     emit(invoke())
 }
 
 @JvmName(name = "iterableToFlowCatching")
-fun <T> Iterable<T>.asFlowCatching() = flowCatching {
+public fun <T> Iterable<T>.asFlowCatching(): Flow<Result<T>> = flow {
     forEach {
         emit(it)
     }
 }
 
 @JvmName(name = "iterableOfProvidersToFlowCatching()")
-fun <T> Iterable<() -> T>.asFlowCatching() = flowCatching {
+public fun <T> Iterable<() -> T>.asFlowCatching(): Flow<Result<T>> = flow {
     forEach {
         emit(kotlin.runCatching { it.invoke() })
     }
 }
 
 @JvmName(name = "iterableOfSuspendingProvidersToFlowCatching()")
-fun <T> Iterable<suspend () -> T>.asFlowCatching() = flowCatching {
+public fun <T> Iterable<suspend () -> T>.asFlowCatching(): Flow<Result<T>> = flow {
     forEach {
         emit(kotlin.runCatching { it.invoke() })
     }

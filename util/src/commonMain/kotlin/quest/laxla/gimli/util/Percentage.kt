@@ -1,30 +1,32 @@
 package quest.laxla.gimli.util
 
+import kotlin.jvm.JvmInline
+
 /**
  * @property asFraction The value of this percentage as a [Float] between `0` and `1`.
  */
 @JvmInline
-value class Percentage private constructor(val asFraction: Float) {
+public value class Percentage private constructor(public val asFraction: Float) {
     /**
      * The value of this percentage as an [Int] between `0` and `100`.
      */
-    val asInt get() = (asFraction * 100).toInt()
+    public val asInt: Int get() = (asFraction * 100).toInt()
 
     init {
         require(asFraction in 0f..1f) { "Percentage must be between 0% and 100%." }
     }
 
-    override fun toString(): String = "$asInt%"
+    override fun toString(): String = "${(asFraction * 100)}%"
 
-    companion object {
+    public companion object {
         /**
          * Creates a [Percentage] from an [Int] between 0 and 100.
          */
-        val Int.percent get() = Percentage(asFraction = this / 100f)
+        public val Int.percent: Percentage get() = Percentage(asFraction = this / 100f)
 
         /**
          * Creates a [Percentage] from a [Float] between 0 and 1.
          */
-        fun Float.toPercentage() = Percentage(asFraction = this)
+        public fun Float.toPercentage(): Percentage = Percentage(asFraction = this)
     }
 }
