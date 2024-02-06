@@ -53,5 +53,5 @@ Gimli may have projects in other languages (in a separate repository) in the fut
 
 ## FAQ
 ### What's the `laxystem` branch?
-It's the maintainer's personal branch, because Codeberg doesn't  allow to fork your own repos. Don't PR into it.
+It's the maintainer's personal branch, because Codeberg doesn't  allow to fork your own repos.
 
