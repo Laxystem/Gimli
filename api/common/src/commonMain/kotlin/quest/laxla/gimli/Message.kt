@@ -1,34 +1,32 @@
 package quest.laxla.gimli
 
-import kotlinx.coroutines.flow.emptyFlow
-import quest.laxla.gimli.util.CatchingFlow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.serialization.Serializable
+import quest.laxla.gimli.util.ImmutableList
 import quest.laxla.gimli.util.emptyString
 
-public sealed interface Message {
+public interface Message : Element.Federalized<Message> { // TODO: separate messages into the revision system
     public val author: Profile
     public val railway: Railway?
     public val replyTo: Message?
     public val title: String
     public val summary: String
     public val body: String
-    public val tags: CatchingFlow<Tag>
-    public val explicitMentions: CatchingFlow<Profile>
+    public val tags: ImmutableList<Ref<Tag>>
+    public val explicitMentions: ImmutableList<Ref<Profile>>
+    public val replies: Flow<Ref<Message>>
 
-    public interface Actual : Message, Element.Federalized<Actual> {
-        public val replies: CatchingFlow<Message> get() = emptyFlow()
-    }
-
+    @Serializable
     public data class CreateBuilder(
-        override val author: Profile,
-        override var replyTo: Message? = null,
-        override var railway: Railway? = null,
-        override var title: String = emptyString(),
-        override var summary: String = emptyString(),
-        override var body: String = emptyString(),
-        override var tags: CatchingFlow<Tag> = emptyFlow(),
-        override var explicitMentions: CatchingFlow<Profile.Actual> = emptyFlow()
-        // TODO: replace direct explicit reference with identifier?
-    ) : Message, Element.Builder.Create<CreateBuilder> {
+        var author: Profile,
+        var replyTo: Message? = null,
+        var railway: Railway? = null,
+        var title: String = emptyString(),
+        var summary: String = emptyString(),
+        var body: String = emptyString(),
+        val tags: MutableList<Ref<Tag>> = mutableListOf(),
+        val explicitMentions: MutableList<Ref<Profile>> = mutableListOf()
+    ) : Element.Builder.Create<CreateBuilder> {
         override fun clone(): CreateBuilder = copy()
     }
 

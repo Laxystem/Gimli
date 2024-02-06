@@ -6,7 +6,7 @@ import quest.laxla.gimli.server.database.dao.Accessor as AccessorDao
 
 object AccessorProvider : ElementProvider<Accessor, AccessorDao> {
 
-    private data class Impl(override val idAtHomeInstance: Long) : Accessor {
+    private data class Impl(override val idAtLocalInstance: Long) : Accessor {
         override val provider: Element.Provider<Accessor>
             get() = AccessorProvider
     }

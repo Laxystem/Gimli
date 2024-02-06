@@ -6,7 +6,7 @@ import quest.laxla.gimli.server.database.dao.Authorizable as AuthorizableDao
 
 object AuthorizableProvider : ElementProvider<Authorizable, AuthorizableDao> {
 
-    private data class Impl(override val idAtHomeInstance: Long) : Authorizable {
+    private data class Impl(override val idAtLocalInstance: Long) : Authorizable {
         override val provider: Element.Provider<Authorizable>
             get() = AuthorizableProvider
     }

@@ -2,13 +2,13 @@ package quest.laxla.gimli
 
 import quest.laxla.gimli.util.Maybe
 
-public interface Permission { // TODO: turn into a proper element?
+public interface Permission { // TODO: serialization
     public val identifier: String
     public val appliesToGuilds: Maybe
     public val appliesToProfiles: Maybe
     public val appliesToRailways: Maybe
 
-    public enum class BuiltIn(
+    public enum class BuiltIn( // TODO: replace example permissions
         override val appliesToProfiles: Boolean = true,
         override val appliesToGuilds: Boolean = true,
         override val appliesToRailways: Boolean = true
@@ -21,14 +21,15 @@ public interface Permission { // TODO: turn into a proper element?
         ManageSelf(appliesToRailways = false),
 
         /**
-         * Veto [Action]s targeting the authorizable to succeed if [enabled][Authorizable.isAllowingActionSuccessVetoes].
+         * Bypass [Vote]s targeting the authorizable,
+         * forcing them to succeed if [enabled][Authorizable.isAllowingBypasses].
          */
-        VetoActionsToSucceed,
+        Bypass,
 
         /**
-         * Veto [Action]s targeting the authorizable to fail if [enabled][Authorizable.isAllowingActionFailureVetoes].
+         * Veto [Vote]s targeting the authorizable to fail if [enabled][Authorizable.isAllowingVetoes].
          */
-        VetoActionsToFail,
+        Veto,
 
         /**
          * Edit or delete a [Message] sent by the authorizable [Profile],
@@ -59,6 +60,6 @@ public interface Permission { // TODO: turn into a proper element?
          */
         Mention;
 
-        override val identifier: String get() = "https://gimli.laxla.quest#permission/$name"
+        override val identifier: String get() = "https://gimli.laxla.quest#PRE_ALPHA/permission/$name"
     }
 }

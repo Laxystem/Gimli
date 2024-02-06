@@ -1,8 +1,12 @@
 package quest.laxla.gimli
 
-import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.Transient
-import quest.laxla.gimli.util.CatchingFlow
+import quest.laxla.gimli.Element.Builder.Create
+import quest.laxla.gimli.Element.Builder.Update
+import quest.laxla.gimli.Element.Provider
+import quest.laxla.gimli.Element.Provider.Creating
+import quest.laxla.gimli.Element.Provider.Updating
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -10,7 +14,7 @@ import kotlin.contracts.contract
 /**
  * Gimli API element, modifiable and creatable via [Provider]s.
  */
-public interface Element<out T> : Identified where T : Element<T> {
+public interface Element<T> : Identified where T : Element<T> {
     /**
      * The [Provider] that created this element.
      *
@@ -20,25 +24,48 @@ public interface Element<out T> : Identified where T : Element<T> {
     public val provider: Provider<T>
 
     /**
-     * Gimli API Element federalized between different instances.
+     * [Element] that may be managed at other instances.
      */
-    public interface Federalized<out T> : Element<T> where T : Federalized<T> {
-        public val externalFederalIdentifiers: CatchingFlow<String> get() = emptyFlow()
+    public interface Federalized<T> : Element<T> where T : Federalized<T> {
+        public val externalFederalIdentifiers: Flow<String>
+
+        @Transient
+        override val provider: Provider<T>
     }
 
     /**
-     * [Updates][Updating], [creates][Creating], and [fetches][get] [Element]s.
+     * Creates federal identifies based on numeral ones.
      */
-    public interface Provider<out T> where T : Element<T> {
+    public fun interface Informer {
         /**
-         * Retrieve an element by its [idAtHomeInstance].
+         * Creates a federal identifier for an element with an [idAtLocalInstance] of [numeralIdentifier] at [domain].
+         *
+         * This function must assume such an element exists.
          */
-        public operator fun get(idAtHomeInstance: Long): T
+        public fun federalIdentifierFor(numeralIdentifier: Long, domain: String): String
+    }
+
+    /**
+     * Responsible for [fetching][get], [updating][Updating], and [creating][Creating] [Element]s.
+     *
+     * All elements [reference][provider] the Provider that created them.
+     */
+    public interface Provider<T> where T : Element<T> {
+        /**
+         * Retrieve an element by its [federalIdentifier].
+         */
+        public suspend fun get(federalIdentifier: String): T
+
+        /**
+         * Creates federal identifiers for [value], by order of impor
+         */
+        public fun createFederalIdentifiersFor(value: T): Sequence<String>
+
 
         /**
          * A [Provider] capable of creating new elements.
          */
-        public interface Creating<out T, CreateBuilder> : Provider<T>
+        public interface Creating<T, CreateBuilder> : Provider<T>
                 where T : Element<T>, CreateBuilder : Builder.Create<CreateBuilder> {
 
             /**
@@ -87,7 +114,7 @@ public interface Element<out T> : Identified where T : Element<T> {
         /**
          * A [Provider] capable of updating existing elements.
          */
-        public interface Updating<out T, UpdateBuilder> : Provider<T>
+        public interface Updating<T, UpdateBuilder> : Provider<T>
                 where T : Element<T>, UpdateBuilder : Builder.Update<UpdateBuilder> {
 
             /**
@@ -133,20 +160,13 @@ public interface Element<out T> : Identified where T : Element<T> {
                 }
             }
         }
-
-        /**
-         * A [Provider] capable of fetching elements via their federal Identifier.
-         */
-        public interface Federal<out T> : Provider<T> where T : Federalized<T> {
-            public operator fun get(federalIdentifier: String): T
-        }
     }
 
     /**
      * [Element] builder.
      *
-     * All properties with a default value must be mutable, and vice versa.
-     * Mutable collections must be stored as `val`s.
+     * All properties must be `var`s.
+     *
      * Implementations must be [Serializable].
      *
      * @see Update
@@ -158,6 +178,10 @@ public interface Element<out T> : Identified where T : Element<T> {
         /**
          * [Element] creation builder.
          *
+         * Collections must be `val`s, and [mutable][MutableCollection].
+         *
+         * TODO: [MutableMap]s support
+         *
          * @see Builder
          * @see Provider.Creating
          */
@@ -166,7 +190,10 @@ public interface Element<out T> : Identified where T : Element<T> {
         /**
          * [Element] update builder.
          *
-         * Mutable properties must be nullable and have a default value of `null`, meaning "unchanged".
+         * Properties must be mutable and use [Optional][quest.laxla.gimli.util.Optional]s,
+         * with a default value of [Optional.Empty][quest.laxla.gimli.util.Optional.Empty]
+         *
+         * TODO: [MutableMap]s support.
          *
          * @see Builder
          * @see Provider.Updating

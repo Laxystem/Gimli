@@ -19,6 +19,9 @@ public value class Percentage private constructor(public val asFraction: Float) 
     override fun toString(): String = "${(asFraction * 100)}%"
 
     public companion object {
+        public val Zero: Percentage get() = 0f.toPercentage()
+        public val Hundred: Percentage get() = 1f.toPercentage()
+
         /**
          * Creates a [Percentage] from an [Int] between 0 and 100.
          */

@@ -1,61 +1,163 @@
 package quest.laxla.gimli
 
-import quest.laxla.gimli.util.Maybe
-import quest.laxla.gimli.util.Percentage
-import quest.laxla.gimli.util.Percentage.Companion.percent
-import quest.laxla.gimli.util.Unknown
-import quest.laxla.gimli.util.isNotFalse
+import quest.laxla.gimli.util.*
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
 
-public interface Authorizable : Element.Federalized<Authorizable> { // TODO: turn into a proper element
-    // votes
+/**
+ * Represents something that [Accessor]s can have [Permission]s at.
+ */
+public interface Authorizable : Element.Federalized<Authorizable> {
+    /**
+     * The minimum and maximum time a time-limited vote may last.
+     *
+     * If the minimum and the maximum are equal, time-limited votes are forbidden.
+     * The minimum must be bigger than or equal to [Duration.ZERO] and smaller than the maximum.
+     * Maximum of [Duration.INFINITE] stands for no limit.
+     *
+     * Fallbacks to [Duration.ZERO] and [Duration.INFINITE].
+     */
+    public val allowedVoteLength: ClosedRange<Duration>
 
-    @Federated(fallback = Federated.Fallback.Default)
-    public val allowedActionVoteLength: ClosedRange<Duration> get() = 7.days..30.days
+    /**
+     * The default time a vote lasts.
+     *
+     * [Duration.INFINITE] stands for time-unlimited votes by default.
+     * Must be within [allowedVoteLength].
+     * Overridable by [Abilities][Ability].
+     *
+     * Fallbacks to 14 [days].
+     */
+    public val defaultVoteLength: Duration
 
-    @Federated(fallback = Federated.Fallback.Default)
-    public val defaultActionVoteLength: Duration get() = Duration.INFINITE
+    /**
+     * The default percent of [Accessor]s that need to vote for the vote to succeed.
+     *
+     * Overridable by [Abilities][Ability].
+     *
+     * Fallbacks to `null` - the Client SHOULD clarify it is unknown.
+     */
+    public val defaultMinimumVoterTurnout: Percentage?
 
-    @Federated(fallback = Federated.Fallback.Default)
-    public val defaultMinimumVoterTurnout: Percentage get() = 75.percent
+    /**
+     * Allows [Accessor]s with the [Permission.BuiltIn.Veto] permission to force a vote to fail.
+     *
+     * It is the client's responsibility to handle [Unknown] values.
+     */
+    public val isAllowingVetoes: Maybe
 
-    @Federated(fallback = Federated.Fallback.Default)
-    public val isAllowingActionFailureVetoes: Boolean get() = false
+    /**
+     * Allows [Accessor]s with the [Permission.BuiltIn.Bypass] permission to force a vote to succeed.
+     *
+     * It is the client's responsibility to handle [Unknown] values.
+     */
+    public val isAllowingBypasses: Maybe
 
-    @Federated(fallback = Federated.Fallback.Default)
-    public val isAllowingActionRetraction: Boolean get() = false
+    /**
+     * Allows [Accessor]s to force votes they've created to fail.
+     *
+     * It is the client's responsibility to handle [Unknown] values.
+     */
+    public val isAllowingVoteRetraction: Maybe
 
-    @Federated(fallback = Federated.Fallback.Default)
-    public val isAllowingActionSuccessVetoes: Maybe get() = Unknown
+    /**
+     * Allows accessors to respond "Neutral",
+     * meaning they're counted for [defaultMinimumVoterTurnout],
+     * without affecting the vote's result.
+     *
+     * It is the client's responsibility to handle [Unknown] values.
+     */
+    public val isAllowingNeutralResponses: Maybe
 
-    @Federated(fallback = Federated.Fallback.Default)
-    public val isAllowingNeutralActionResponses: Maybe get() = Unknown
+    /**
+     * Allows time-independent votes, that is, votes that won't time out.
+     *
+     * It is the client's responsibility to handle [Unknown] values.
+     */
+    public val isAllowingTimeIndependentVotes: Maybe
 
-    @Federated(fallback = Federated.Fallback.Default)
-    public val isAllowingTimeIndependentActions: Maybe get() = Unknown
+    /**
+     * Are action responses public?
+     *
+     * The client MUST clarify it is unknown.
+     */
+    public val publishVoteResponses: Maybe
 
-    @Federated(fallback = Federated.Fallback.Default)
-    public val publishActionResponses: Maybe get() = Unknown
+    /**
+     * Are time-limited votes automatically evaluated when the remaining voters cannot
+     * change its result?
+     *
+     * Votes will only be evaluated if the minimum voter turnout is full.
+     * Must be `true` or [Unknown] if [voteTimeoutResult] isn't [VoteTimeoutResult.Evaluate].
+     *
+     * It is the client's responsibility to handle [Unknown] values.
+     */
+    public val isAutomaticallyEvaluatingTimeLimitedVotes: Maybe
 
-    // time-limited votes
-    @Federated(fallback = Federated.Fallback.Default)
-    public val isAutomaticallyEvaluatingTimeLimitedActions: Maybe get() = Unknown
+    /**
+     * When a time-limited vote time-outs, what happens?
+     *
+     * It is the client's responsibility to handle [Unknown] values.
+     */
+    public val voteTimeoutResult: Vote.TimeoutResult
 
-    @Federated(fallback = Federated.Fallback.Default)
-    public val actionTimeoutResult: VoteTimeoutResult get() = VoteTimeoutResult.Evaluate
+    /**
+     * Can votes be created with a length different from the invoked [Ability]'s?
+     *
+     * It is the client's responsibility to handle [Unknown] values.
+     * Note votes must still adhere to the [allowedVoteLength].
+     *
+     * It is the client's responsibility to handle [Unknown] values.
+     */
+    public val isAllowingCustomVoteLength: Maybe
 
-    // time-independent votes
-    @Federated(fallback = Federated.Fallback.Default)
-    public val isAutomaticallyEvaluatingTimeIndependentActions: Maybe get() = Unknown
+    /**
+     * Are time-unlimited votes automatically evaluated when the remaining voters cannot
+     * change its result?
+     *
+     * It is the client's responsibility to handle [Unknown] values.
+     */
+    public val isAutomaticallyEvaluatingTimeUnlimitedVotes: Maybe
 
-    @Federated(fallback = Federated.Fallback.Default)
-    public val isAllowingTimeIndependentActionResponseChange: Maybe get() = Unknown
+    /**
+     * Can voters change their response on time-unlimited votes?
+     *
+     * It is the client's responsibility to handle [Unknown] values.
+     */
+    public val isAllowingTimeUnlimitedVoteResponseChange: Maybe get() = Unknown
 
-    public companion object {
+    /**
+     * Gets the [Ability] of this [Authorizable] to perform [permission].
+     */
+    public suspend fun getAbility(permission: Permission)
+
+    public data class UpdateBuilder(
+        override val primaryFederalIdentifier: String,
+        public var minimumAllowedVoteLength: Optional<Int> = Optional.Empty,
+        public var maximumAllowedVoteLength: Optional<Int> = Optional.Empty,
+        public var defaultVoteLength: Optional<Duration> = Optional.Empty,
+        public var minimumVoterTurnout: Optional<Percentage> = Optional.Empty,
+        public var isAllowingVetoes: Optional<Boolean> = Optional.Empty,
+        public var isAllowingBypasses: Optional<Boolean> = Optional.Empty,
+        public var isAllowingRetraction: Optional<Boolean> = Optional.Empty,
+        public var isAllowingNeutralResponses: Optional<Boolean> = Optional.Empty,
+        public var isAllowingTimeUnlimitedVotes: Optional<Boolean> = Optional.Empty,
+        public var publishVoteResponses: Optional<Boolean> = Optional.Empty,
+        public var isAutomaticallyEvaluatingTimeLimitedVotes: Optional<Boolean> = Optional.Empty,
+        public var voteTimeoutResult: Optional<Vote.TimeoutResult> = Optional.Empty,
+        public var isAutomaticallyEvaluatingTimeUnlimitedVotes: Optional<Boolean> = Optional.Empty,
+        public var isAllowingTimeUnlimitedVoteResponseChange: Optional<Boolean> = Optional.Empty,
+    ) : Element.Builder.Update<UpdateBuilder> {
+        override fun clone(): UpdateBuilder = this
+    }
+
+    public companion object : Element.Informer {
         public val Authorizable.isValid: Boolean
-            get() = ((isAllowingTimeIndependentActions.isNotFalse && defaultActionVoteLength == Duration.INFINITE) || defaultActionVoteLength in allowedActionVoteLength)
-                    && allowedActionVoteLength.start > Duration.ZERO && allowedActionVoteLength.endInclusive < Duration.INFINITE
-                    && (isAutomaticallyEvaluatingTimeLimitedActions.isNotFalse || actionTimeoutResult == VoteTimeoutResult.Evaluate)
+            get() = ((isAllowingTimeIndependentVotes.isNotFalse && defaultVoteLength == Duration.INFINITE) || defaultVoteLength in allowedVoteLength)
+                    && allowedVoteLength.start > Duration.ZERO
+                    && (isAutomaticallyEvaluatingTimeLimitedVotes.isNotFalse || voteTimeoutResult == Vote.TimeoutResult.Evaluate)
+
+        override fun federalIdentifierFor(numeralIdentifier: Long, domain: String): String =
+            FederalIdentifier.ofAuthorization(domain) + "/authorizable/$numeralIdentifier"
     }
 }
