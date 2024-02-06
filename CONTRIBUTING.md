@@ -4,7 +4,9 @@ Project: Gimli is available on [Codeberg](https://Codeberg.org/Laxystem/Gimli), 
 
 ## Always Ask, Not to Ask
 
-Always ask if unsure. Don't ask to ask, just ask. Creating an entire issue for minor problems and/or questions is fine and encouraged, just make sure your question hasn't been asked already.
+Always ask if unsure. Don't ask to ask, just ask.
+
+Creating an entire issue for minor problems and/or questions is fine and encouraged, just make sure your question hasn't been asked already.
 
 An exception to this rule is "when". Gimli is a hobby project.
 
@@ -16,13 +18,13 @@ Always PR into the Codeberg repo. Creating a Codeberg account is as easy as clic
 
 We only allow merges, because rebasing removes commit signatures, and squashes destroy the branch graph.
 
-### Branch to PR into
+### Branch to PR Into
 
 Generally, always PR into the `development` branch, unless there's a special branch for the feature you're adding.
 
-## Libraries
+## Libraries, Frameworks & Tooling
 
-Make sure you know how the libraries and frameworks Gimli uses work (or at least, how to use them), especially [Kotlin](https://kotlinlang.org/docs), [SQL](https://postgresql.org/docs), and [KotlinX Coroutines](https://kotlinlang.org/docs/coroutines-guide.html)
+Make sure you know how the libraries and frameworks Gimli uses work (or at least, how to use them), especially [Kotlin](https://kotlinlang.org/docs), [SQL](https://postgresql.org/docs), and [KotlinX Coroutines](https://kotlinlang.org/docs/coroutines-guide.html).
 
 ## Out of Scope
 
