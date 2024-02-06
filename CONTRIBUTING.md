@@ -1,4 +1,4 @@
-# Project: Gimli: Cintribution Guide
+# Contributing to Project: Gimli
 
 Project: Gimli is available on [Codeberg](https://Codeberg.org/Laxystem/Gimli), and mirrored on [GitHub](https://GitHub.com/Laxystem/Gimli).
 
