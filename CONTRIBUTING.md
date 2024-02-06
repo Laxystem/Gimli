@@ -2,6 +2,12 @@
 
 Project: Gimli is available on [Codeberg](https://Codeberg.org/Laxystem/Gimli), and mirrored on [GitHub](https://GitHub.com/Laxystem/Gimli).
 
+## Always Ask, Not to Ask
+
+Always ask if unsure. Don't ask to ask, just ask. Creating an entire issue for minor problems and/or questions is fine and encouraged, just make sure your question hasn't been asked already.
+
+An exception to this rule is "when". Gimli is a hobby project.
+
 ## PR Guide
 
 Always PR into the Codeberg repo. Creating a Codeberg account is as easy as clicking "Register", "log in with", then your favorite forge.
@@ -12,7 +18,7 @@ We only allow merges, because rebasing removes commit signatures, and squashes d
 
 ### Branch to PR into
 
-Generally, always PR into the `development` branch, unless there's a special branch for the feature you're trying to add. Create an issue for the feature you're trying to add, and ask if unsure.
+Generally, always PR into the `development` branch, unless there's a special branch for the feature you're adding.
 
 ## Libraries
 
