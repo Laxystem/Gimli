@@ -120,7 +120,7 @@ class MyClass {
     // fieldless variables
     var getterAndSetter
         get() = TODO()
-        set() = TODO() 
+        set(value) = TODO() 
 
     // <overriding fieldless values and variables>
     
@@ -130,7 +130,7 @@ class MyClass {
     // functions and sub-classes
     fun function() = TODO()
 
-    class subclass()
+    class Subclass()
 
     override fun overridingFunction() = TODO()
 
