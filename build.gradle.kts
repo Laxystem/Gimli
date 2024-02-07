@@ -1,11 +1,19 @@
+import dev.yumi.gradle.licenser.YumiLicenserGradlePlugin
+
+plugins {
+    id("dev.yumi.gradle.licenser")
+}
+
 allprojects {
-    repositories {
-        mavenCentral()
-        maven(url = "https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental") {
-            name = "Kotlin Wasm Experimental"
-        }
-    }
+    apply<YumiLicenserGradlePlugin>()
 
     version = project.properties["version"]!!
     group = "quest.laxla"
+
+    repositories.mavenCentral()
+
+    license {
+        rule(rootProject.file("HEADER.txt"))
+        include("**/*.kt")
+    }
 }

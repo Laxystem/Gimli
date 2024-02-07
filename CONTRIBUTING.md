@@ -84,34 +84,6 @@ This repository contains two types of Kotlin files.
 Sort code elements by usage.
 If `foo()` calls `bar()`, `bar()` should be written first.
 
-
-#### Licensing
-
-The following should be at the top of every file:
-```kotlin
-/*
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/.
- *
- * Copyright (C) <latest update year> Project: Gimli and contributiors (<previous contributors>, <your name here>).
- */
-```
-
-When you change a file, add your name where `<your name here>` is (unless it's already there).
-
-For example:
-
-```kotlin
-/*
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/.
- *
- * Copyright (C) 2024 Project: Gimli and contributors (Laxystem).
- */
-```
-
 #### Utility Files
 
 Contain *zero* non-`private` top-level `class`es, `interface`s and `object`s.

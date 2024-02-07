@@ -22,7 +22,7 @@ kotlin {
         jvmToolchain(jdk.toInt())
     }
 
-    @OptIn(ExperimentalWasmDsl::class) wasmJs()
+    @OptIn(ExperimentalWasmDsl::class) wasmJs().browser()
 
     sourceSets.commonMain.dependencies {
         api(project(path = ":util"))

@@ -24,6 +24,8 @@ For a list of protocols implemented by Project: Gimli, see [FEDERATION.md](FEDER
 * **[Extism](https://extism.org) Java [SDK](https://github.com/extism/java-sdk)** (BSD 3-Clause),
   a source-visible WebAssembly host. Temporarily used by Gimli's official clients to interact with OpenMLS,
   and will be replaced by AndroidX's Messaging Layer Security implementation.
+* **[Gradle](https://gradle.org)** (Apache 2.0),
+  build system and package manager for Kotlin projects.
 * **[IntelliJ Markdown](https://github.com/JetBrains/Markdown/)** (Apache 2.0),
   a Kotlin/Multiplatform Markdown-to-HTML compiler, supporting various flavours.
 * **[Jakarta](https://jakarta.ee)** (`jakarta`; EPL 2.0),
@@ -64,4 +66,6 @@ For a list of protocols implemented by Project: Gimli, see [FEDERATION.md](FEDER
   an implementation of JsonLD written in Java.
 * **[WebAssembly](https://webassembly.org)** (Apache 2.0),
   a modular virtual machine runnable both standalone and within the browser.
-  Gimli's web client compiles to Wasm, and official clients uses Wasm libraries via Extism.
+  Gimli's web client compiles to Wasm, and official clients use Wasm libraries via Extism.
+* **[Yumi Gradle Licenser](https://github.com/YumiProject/yumi-gradle-licenser)** (`licenser`; MPL 2.0),
+  an automatic license header generator for Gradle.
