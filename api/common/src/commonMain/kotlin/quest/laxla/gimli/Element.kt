@@ -1,12 +1,15 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Copyright (C) 2024 Project Gimli and contributors.
+ */
+
 package quest.laxla.gimli
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.Transient
-import quest.laxla.gimli.Element.Builder.Create
-import quest.laxla.gimli.Element.Builder.Update
-import quest.laxla.gimli.Element.Provider
-import quest.laxla.gimli.Element.Provider.Creating
-import quest.laxla.gimli.Element.Provider.Updating
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -34,18 +37,6 @@ public interface Element<T> : Identified where T : Element<T> {
     }
 
     /**
-     * Creates federal identifies based on numeral ones.
-     */
-    public fun interface Informer {
-        /**
-         * Creates a federal identifier for an element with an [idAtLocalInstance] of [numeralIdentifier] at [domain].
-         *
-         * This function must assume such an element exists.
-         */
-        public fun federalIdentifierFor(numeralIdentifier: Long, domain: String): String
-    }
-
-    /**
      * Responsible for [fetching][get], [updating][Updating], and [creating][Creating] [Element]s.
      *
      * All elements [reference][provider] the Provider that created them.
@@ -54,13 +45,14 @@ public interface Element<T> : Identified where T : Element<T> {
         /**
          * Retrieve an element by its [federalIdentifier].
          */
-        public suspend fun get(federalIdentifier: String): T
+        public suspend fun get(federalIdentifier: String, invalidateCache: Boolean = false): T
 
-        /**
-         * Creates federal identifiers for [value], by order of impor
-         */
-        public fun createFederalIdentifiersFor(value: T): Sequence<String>
-
+        public companion object {
+            public suspend fun <T> Provider<T>.get(
+                ref: Ref<T>,
+                invalidateCache: Boolean = false
+            ): T where T : Element<T> = get(ref.primaryFederalIdentifier, invalidateCache)
+        }
 
         /**
          * A [Provider] capable of creating new elements.

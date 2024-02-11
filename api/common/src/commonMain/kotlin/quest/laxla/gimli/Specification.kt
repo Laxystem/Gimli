@@ -1,3 +1,11 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Copyright (C) 2024 Project Gimli and contributors.
+ */
+
 package quest.laxla.gimli
 
 public enum class Specification(
@@ -6,12 +14,13 @@ public enum class Specification(
 ) {
     ActivityPub(context = "https://www.w3.org/ns/activitystreams"),
     ForgeFed(context = "https://forgefed.org/ns"),
-    GimliSpecification(context = "https://gimli.laxla.quest/namespace.jsonld"), // TODO: actually upload something there lmao
-    FediverseEnhancementProposal(
-        context = "https://codeberg.org/fediverse/fep/raw/branch/main/fep/2e40/namespace.json",
-        baseUrl = "https://w3id.org/fep#"
-    );
+    Gimli(context = "https://gimli.laxla.quest/ns"); // TODO: actually upload something there
 
+    /**
+     * Marks this property or class as complying to a specification.
+     *
+     * This annotation is non-exclusionary.
+     */
     @MustBeDocumented
     @Repeatable
     @Retention(AnnotationRetention.RUNTIME)

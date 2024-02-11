@@ -1,22 +1,33 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Copyright (C) 2024 Project Gimli and contributors.
+ */
+
 package quest.laxla.gimli
 
 import quest.laxla.gimli.Ref.*
+import kotlin.jvm.JvmInline
 
 /**
- * References an [element][Element] [directly][Direct],
- * [via numeral identifier][Numeral],
- * or [via federal identifier][Federal].
+ * References [Element]s [directly][Direct] or [via federal identifier][Federal].
  */
 public sealed interface Ref<T> : Identified where T : Element<T> { // TODO: serialize
-    public data class Direct<T>(val value: T) : Ref<T> where T : Element<T> {
+    @JvmInline
+    public value class Direct<T>(public val value: T) : Ref<T> where T : Element<T> {
         override val primaryFederalIdentifier: String get() = value.primaryFederalIdentifier
     }
 
-    public data class Federal<T>(val identifier: String) : Ref<T> where T : Element.Federalized<T> {
-        override val primaryFederalIdentifier: String get() = identifier
-    }
+    @JvmInline
+    public value class Federal<T>(override val primaryFederalIdentifier: String) :
+        Ref<T> where T : Element.Federalized<T>
 
     public companion object {
+        /**
+         * Wrap this as a direct reference.
+         */
         public val <T> T.ref: Direct<T> where T : Element<T> get() = Direct(value = this)
     }
 }
