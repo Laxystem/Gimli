@@ -1,0 +1,59 @@
+public final class quest/laxla/gimli/ld/AppKt {
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public final class quest/laxla/gimli/ld/JsonLDKt {
+	public static final field AcceptedContentTypes Ljava/lang/String;
+	public static final field OutputContentType Ljava/lang/String;
+}
+
+public abstract interface class quest/laxla/gimli/ld/LdElement : quest/laxla/gimli/ld/property/LdpID, quest/laxla/gimli/ld/property/LdpType {
+	public static final field Companion Lquest/laxla/gimli/ld/LdElement$Companion;
+	public abstract fun getLanguage ()Ljava/util/Locale;
+	public abstract fun getTextDirection ()Lquest/laxla/gimli/util/TextDirection;
+	public abstract fun getValue ()Ljava/lang/Object;
+}
+
+public final class quest/laxla/gimli/ld/LdElement$Companion {
+	public final fun serializer (Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class quest/laxla/gimli/ld/activity/Type {
+	public static final field Companion Lquest/laxla/gimli/ld/activity/Type$Companion;
+	public abstract fun getName ()Ljava/lang/String;
+}
+
+public final class quest/laxla/gimli/ld/activity/Type$Companion {
+	public final fun invoke (Ljava/lang/String;)Lquest/laxla/gimli/ld/activity/Type;
+}
+
+public final class quest/laxla/gimli/ld/activity/TypeKt {
+	public static final fun toActivityStreamsType (Ljava/lang/String;)Lquest/laxla/gimli/ld/activity/Type;
+	public static final fun toType (Ljava/lang/String;)Lquest/laxla/gimli/ld/activity/Type;
+}
+
+public final class quest/laxla/gimli/ld/activity/UtilsKt {
+	public static final field ActivityStreams Ljava/lang/String;
+}
+
+public abstract interface class quest/laxla/gimli/ld/activity/property/AspName {
+	public abstract fun getName ()Lkotlinx/collections/immutable/ImmutableList;
+}
+
+public abstract interface class quest/laxla/gimli/ld/activity/type/AsObject : quest/laxla/gimli/ld/property/LdpID, quest/laxla/gimli/ld/property/LdpType {
+	public static final field Companion Lquest/laxla/gimli/ld/activity/type/AsObject$Companion;
+}
+
+public final class quest/laxla/gimli/ld/activity/type/AsObject$Companion : quest/laxla/gimli/ld/activity/Type {
+	public fun getName ()Ljava/lang/String;
+}
+
+public abstract interface class quest/laxla/gimli/ld/property/LdpID {
+	public abstract fun getId ()Ljava/lang/String;
+}
+
+public abstract interface class quest/laxla/gimli/ld/property/LdpType {
+	public abstract fun getType ()Lkotlinx/collections/immutable/ImmutableList;
+}
+

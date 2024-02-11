@@ -17,6 +17,8 @@ For a list of protocols implemented by Project: Gimli, see [FEDERATION.md](FEDER
 
 ## Alphabetically Sorted List of Dependencies
 
+* **[Binary Compatibility Validator](https://github.com/Kotlin/binary-compatibility-validator)** (`abi`; Apache 2.0),
+  generates files describing public API signatures, for usage with git diff.
 * **[Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform)** (Apache 2.0),
   a Kotlin UI framework developed by Google for Android, and ported to Kotlin/Multiplatform by JetBrains.
 * **[Dokka](https://GitHub.com/Kotlin/Dokka)** (`dokka`; Apache 2.0),
@@ -47,6 +49,8 @@ For a list of protocols implemented by Project: Gimli, see [FEDERATION.md](FEDER
   safe immutable collections.
 * **[KotlinX Coroutines](https://GitHub.com/Kotlin/KotlinX.Coroutines)** (`coroutines`; Apache 2.0),
   structured concurrency.
+* **[KotlinX Kover](https://github.com/Kotlin/KotlinX-Kover)** (`kover`; Apache 2.0),
+  test coverage report generator.
 * **[KotlinX Serialization](https://GitHub.com/Kotlin/KotlinX.Serialization)** (`serialization`; Apache 2.0),
   a Kotlin/Multiplatform compile-time serialization library.
 * **[Ktor](https://ktor.io)** (`ktor`; Apache 2.0),

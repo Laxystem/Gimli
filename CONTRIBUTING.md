@@ -10,11 +10,74 @@ Always ask if unsure. Don't ask to ask, just ask.
 Creating an entire issue for minor problems and/or questions is fine and encouraged.
 However, make sure your question hasn't been asked already.
 
-An exception to this rule is "when?". Gimli is a hobby project.
+An exception to this rule is "when?".
+Gimli is a hobby project, we may have roadmaps, but we don't have timetables.
 
-## PRs
+## APIs & Backwards Compatibility
 
-*Always* PR into the `development` branch of the Codeberg repository.
+APIs (Application Programming Interfaces) are collections of definitions that generally don't change,
+allowing programs to talk with each other.
+
+The Kotlin documentation has a
+neat [article](https://kotlinlang.org/docs/jvm-api-guidelines-backward-compatibility.html) about the topic.
+
+### Bytecode Backwards-Compatibility
+
+Project: Gimli maintains ABIs, that is, Application Bytecode Interfaces.
+ABIs are composed of compiled signatures of code elements (such as functions, classes, properties, etc.).
+
+Each platform has its own ABI, but currently, only one is generated and checked—the JVM (including Android).
+It is stored inside each module's `abi` folder, as an `.api` file.
+
+To generate the ABI, run:
+
+```shell
+./gradlew apiDump
+```
+
+To make sure you haven't accidentally changed the ABI, run:
+
+```shell
+./gradlew apiCheck
+```
+
+### Behavioral Backwards-Compatibility
+
+#### Documentation
+
+The API's behaviour is defined by its documentation,
+written in [KDoc](https://kotlinlang.org/docs/kotlin-doc.html).
+
+To compile KDoc into a website, run:
+
+```shell
+./gradlew dokkaHtmlMultiModule
+```
+
+The result will be outputted at [`build/dokka/htmlMultiModule`](build/dokka/htmlMultiModule/index.html),
+and requires a web server to be viewed properly.
+
+#### Tests
+
+To compile a test coverage report, run:
+
+```shell
+./gradlew koverHtmlReport
+```
+
+The result will be outputted at [`build/reports/kover/html`](build/reports/kover/html/index.html).
+
+To run all tests, run:
+
+```shell
+./gradlew test
+```
+
+## Git
+
+Generally, PRs should target the `development` branch of the Codeberg repository.
+
+For breaking changes, ask the maintainer.
 
 ### Moving and Renaming Files
 
@@ -30,21 +93,23 @@ We only allow merges.
 
 Feel free to squash/rebase locally, as long as it only affects your own commits.
 
-### Last Checks
+### Before Committing
 
-Before committing and submitting a PR, perform the following steps.
+1. Make sure all tests succeed.
+2. Update or create tests for functionality you change.
+3. If you modify public API,
+    *
+        1. [Update the ABI](#bytecode-backwards-compatibility).
+        2. Make sure the changes match your expectations.
+    * Otherwise, [check for breaking changes](#bytecode-backwards-compatibility).
 
-1. Run all tests, and make sure tests that have succeeded before your commit still do.
-2. Update or create tests for functionality you've changed.
-3. Update or create documentation (via [KDoc](https://kotlinlang.org/docs/kotlin-doc.html)).
-4. If you've updated or added dependencies, update [`DEPENDENCIES.md`](DEPENDENCIES.md).
-5. If you've changed federation behavior, update [`FEDERATION.md`](FEDERATION.md).
-
-## Libraries, Frameworks & Tooling
-
-Make sure you know how the libraries and frameworks Gimli uses work (or at least, how to use them),
-especially [Kotlin](https://kotlinlang.org/docs), [SQL](https://postgresql.org/docs),
-and [KotlinX Coroutines](https://kotlinlang.org/docs/coroutines-guide.html).
+4. Make sure the repo builds successfully, via:
+   ```shell
+   ./gradlew build
+   ```
+5. Update or create documentation (via [KDoc](https://kotlinlang.org/docs/kotlin-doc.html)).
+6. If you update, add or remove dependencies, update [`DEPENDENCIES.md`](DEPENDENCIES.md).
+7. If you modify federation behavior, update [`FEDERATION.md`](FEDERATION.md).
 
 ## Out of Scope
 

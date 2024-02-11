@@ -1,0 +1,4 @@
+public abstract interface class quest/laxla/gimli/server/Informer {
+	public abstract fun federalIdentifierOf (J)Ljava/lang/String;
+}
+
