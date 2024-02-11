@@ -46,3 +46,19 @@ kotlin {
         runtimeOnly("ch.qos.logback:logback-classic:$logback")
     }
 }
+
+val maven by publishing.publications.creating(MavenPublication::class) {
+    artifactId = "util"
+
+    pom {
+        name = "Project: Gimli - Utilities"
+        description = "General utilities for Project: Gimli"
+        url = project.properties["packageUrl"].toString()
+        licenses {
+            license {
+                name = project.properties["packageLicenseName"].toString()
+                url = project.properties["packageLicenseUrl"].toString()
+            }
+        }
+    }
+}

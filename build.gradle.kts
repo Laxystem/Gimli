@@ -11,6 +11,7 @@ plugins {
     id("org.jetbrains.kotlinx.binary-compatibility-validator")
     id("org.jetbrains.kotlinx.kover")
     kotlin("jvm") // only used for dokka
+    publishing
 }
 
 buildscript {
@@ -34,9 +35,10 @@ allprojects {
     apply<YumiLicenserGradlePlugin>()
     apply<DokkaPlugin>()
     apply<KoverGradlePlugin>()
+    apply<MavenPublishPlugin>()
 
     version = rootProject.properties["version"]!!
-    group = "quest.laxla"
+    group = "quest.laxla.gimli"
 
     repositories.mavenCentral()
 
@@ -56,6 +58,23 @@ allprojects {
     tasks.withType<DokkaTask>().configureEach {
         pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
             footerMessage = "Copyright © 2024 Project Gimli and Contributors. Licensed MPL 2.0."
+        }
+    }
+
+    publishing {
+        repositories {
+            maven(url = "https://codeberg.org/api/packages/${System.getenv("CI_REPO_OWNER")}/maven") {
+                name = "Codeberg"
+
+                credentials(HttpHeaderCredentials::class) {
+                    name = "Authorization"
+                    value = "token ${System.getenv("CODEBERG PACKAGES")}"
+                }
+
+                authentication {
+                    val header by creating(HttpHeaderAuthentication::class)
+                }
+            }
         }
     }
 }
