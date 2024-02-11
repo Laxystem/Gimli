@@ -37,12 +37,8 @@ Before committing and submitting a PR, perform the following steps.
 1. Run all tests, and make sure tests that have succeeded before your commit still do.
 2. Update or create tests for functionality you've changed.
 3. Update or create documentation (via [KDoc](https://kotlinlang.org/docs/kotlin-doc.html)).
-4. Run the following script:
-    ```shell
-    ./gradlew applyLicenses # add the license header
-    ```
-5. If you've updated or added dependencies, update [`DEPENDENCIES.md`](DEPENDENCIES.md).
-6. If you've changed federation behavior, update [`FEDERATION.md`](FEDERATION.md).
+4. If you've updated or added dependencies, update [`DEPENDENCIES.md`](DEPENDENCIES.md).
+5. If you've changed federation behavior, update [`FEDERATION.md`](FEDERATION.md).
 
 ## Libraries, Frameworks & Tooling
 

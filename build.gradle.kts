@@ -7,6 +7,10 @@ plugins {
     kotlin("jvm") // only used for dokka
 }
 
+tasks.build {
+    dependsOn(tasks.applyLicenses)
+}
+
 allprojects {
     apply<YumiLicenserGradlePlugin>()
     apply<DokkaPlugin>()
