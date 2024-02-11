@@ -3,6 +3,10 @@ steps:
     image: gradle:8.6-jdk17
     commands:
       - ./gradlew build
+    when:
+      - event: push
+        branch: ${CI_REPO_DEFAULT_BRANCH}
+      - event: pull_request
   - name: release
     image: gradle:8.6-jdk17
     when:
