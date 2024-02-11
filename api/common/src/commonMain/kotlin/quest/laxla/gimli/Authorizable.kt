@@ -3,7 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  *
- * Copyright (C) 2024 Project Gimli and contributors.
+ * Copyright (C) 2024 Project Gimli and Contributors.
  */
 
 package quest.laxla.gimli
@@ -53,14 +53,14 @@ public interface Authorizable : Element.Federalized<Authorizable> {
     public val defaultMinimumVoterTurnout: Percentage
 
     /**
-     * Allows [Accessor]s with the [Permission.BuiltIn.Veto] permission to force a vote to fail.
+     * Allows [Accessor]s with the [Permission.Veto] permission to force a vote to fail.
      *
      * It is the client's responsibility to handle [Unknown] values.
      */
     public val isAllowingVetoes: Boolean
 
     /**
-     * Allows [Accessor]s with the [Permission.BuiltIn.Bypass] permission to force a vote to succeed.
+     * Allows [Accessor]s with the [Permission.Bypass] permission to force a vote to succeed.
      *
      * It is the client's responsibility to handle [Unknown] values.
      */

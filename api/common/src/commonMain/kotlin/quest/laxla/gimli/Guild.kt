@@ -3,7 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  *
- * Copyright (C) 2024 Project Gimli and contributors.
+ * Copyright (C) 2024 Project Gimli and Contributors.
  */
 
 @file:Suppress("RUNTIME_ANNOTATION_NOT_SUPPORTED")
@@ -24,7 +24,7 @@ public sealed interface Guild : Element.Federalized<Guild> {
      * The default [Railway] permissions.
      *
      * Guilds also have additional, unique permissions that are stored in this property.
-     * Permissions for the Guild's anonymous profile can be found at [profile].[authorizable][Profile.Actual.authorizable].
+     * Permissions for the Guild's anonymous profile can be found at [profile].[authorizable][Profile.authorizable].
      */
     public val authorizable: Authorizable
 

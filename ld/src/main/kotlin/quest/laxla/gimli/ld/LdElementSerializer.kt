@@ -3,22 +3,19 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  *
- * Copyright (C) 2024 Project Gimli and contributors.
+ * Copyright (C) 2024 Project Gimli and Contributors.
  */
 
 package quest.laxla.gimli.ld
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import quest.laxla.gimli.ld.impl.LdElementImpl
 
-typealias SerializableLdElement<T> = @Serializable(with = LdElementSerializer::class) LdElement<T>
-
-class LdElementSerializer<T>(tSerializer: KSerializer<T>) : KSerializer<LdElement<T>> where T : Any {
+internal class LdElementSerializer<T>(tSerializer: KSerializer<T>) : KSerializer<LdElement<T>> where T : Any {
     private val impl = LdElementImpl.serializer(tSerializer)
 
     @OptIn(ExperimentalSerializationApi::class)
