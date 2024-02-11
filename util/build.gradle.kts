@@ -17,6 +17,7 @@ val serialization: String by properties
 
 kotlin {
     applyDefaultHierarchyTemplate()
+    withSourcesJar()
 
     @OptIn(ExperimentalKotlinGradlePluginApi::class) compilerOptions {
         allWarningsAsErrors = true
@@ -44,21 +45,5 @@ kotlin {
 
     sourceSets.jvmMain.dependencies {
         runtimeOnly("ch.qos.logback:logback-classic:$logback")
-    }
-}
-
-val maven by publishing.publications.creating(MavenPublication::class) {
-    artifactId = "util"
-
-    pom {
-        name = "Project: Gimli - Utilities"
-        description = "General utilities for Project: Gimli"
-        url = project.properties["packageUrl"].toString()
-        licenses {
-            license {
-                name = project.properties["packageLicenseName"].toString()
-                url = project.properties["packageLicenseUrl"].toString()
-            }
-        }
     }
 }
