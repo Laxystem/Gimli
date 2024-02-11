@@ -68,7 +68,7 @@ allprojects {
 
                 credentials(HttpHeaderCredentials::class) {
                     name = "Authorization"
-                    value = "token ${System.getenv("CODEBERG PACKAGES")}"
+                    value = "token ${System.getenv("CODEBERG_CREATE_PACKAGES_TOKEN")}"
                 }
 
                 authentication {
