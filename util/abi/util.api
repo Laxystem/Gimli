@@ -1,0 +1,219 @@
+public final class quest/laxla/gimli/util/BooleansKt {
+	public static final fun implies (ZZ)Z
+}
+
+public final class quest/laxla/gimli/util/CatchingFlowKt {
+	public static final fun asFlowCatching (Lkotlin/jvm/functions/Function0;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun asFlowCatching (Lkotlin/jvm/functions/Function1;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun catching (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun catchingFlowOf (Ljava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun catchingFlowOf (Ljava/lang/Throwable;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun catchingFlowOf ([Ljava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun catchingFlowOf ([Ljava/lang/Throwable;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun emit (Lkotlinx/coroutines/flow/FlowCollector;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun emit (Lkotlinx/coroutines/flow/FlowCollector;Ljava/lang/Throwable;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun filterFailures (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun flowCatching (Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun handleFailures (Lkotlinx/coroutines/flow/Flow;Lio/github/oshai/kotlinlogging/KLogger;Lio/github/oshai/kotlinlogging/Level;)Lkotlinx/coroutines/flow/Flow;
+	public static synthetic fun handleFailures$default (Lkotlinx/coroutines/flow/Flow;Lio/github/oshai/kotlinlogging/KLogger;Lio/github/oshai/kotlinlogging/Level;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun iterableOfProvidersToFlowCatching() (Ljava/lang/Iterable;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun iterableOfSuspendingProvidersToFlowCatching() (Ljava/lang/Iterable;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun iterableToFlowCatching (Ljava/lang/Iterable;)Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class quest/laxla/gimli/util/DomainsKt {
+	public static final fun extractDomain (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun isOfDomain (Ljava/lang/String;Ljava/lang/String;)Z
+}
+
+public final class quest/laxla/gimli/util/EnvKt {
+	public static final fun env (Ljava/lang/String;)Lkotlin/properties/ReadOnlyProperty;
+	public static final fun getEnv ()Lkotlin/properties/ReadOnlyProperty;
+	public static final fun getEnvironment ()Lkotlinx/collections/immutable/ImmutableMap;
+	public static final fun updateEnvironmentVariables ()V
+}
+
+public final class quest/laxla/gimli/util/Env_jvmKt {
+	public static final fun fetchEnvironmentVariables (Ljava/util/Map;)Lkotlinx/collections/immutable/ImmutableMap;
+}
+
+public final class quest/laxla/gimli/util/ImmutableListKt {
+	public static final fun emptyPersistentList ()Lkotlinx/collections/immutable/PersistentList;
+}
+
+public final class quest/laxla/gimli/util/ImmutableMapKt {
+	public static final fun emptyPersistentMap ()Lkotlinx/collections/immutable/PersistentMap;
+}
+
+public final class quest/laxla/gimli/util/Locale_jvmKt {
+	public static final fun getCode (Ljava/util/Locale;)Ljava/lang/String;
+	public static final fun getCurrentLocale ()Ljava/util/Locale;
+	public static final fun getFormatted (Ljava/util/Locale;)Ljava/lang/String;
+	public static final fun getFormattedLanguage (Ljava/util/Locale;)Ljava/lang/String;
+	public static final fun getFormattedRegion (Ljava/util/Locale;)Ljava/lang/String;
+	public static final fun getFormattedScript (Ljava/util/Locale;)Ljava/lang/String;
+	public static final fun getLanguageCode (Ljava/util/Locale;)Ljava/lang/String;
+	public static final fun getRegionCode (Ljava/util/Locale;)Ljava/lang/String;
+	public static final fun getScriptCode (Ljava/util/Locale;)Ljava/lang/String;
+	public static final fun toLocale (Ljava/lang/String;)Ljava/util/Locale;
+}
+
+public final class quest/laxla/gimli/util/MaybeKt {
+	public static final fun and (Ljava/lang/Boolean;Ljava/lang/Boolean;)Ljava/lang/Boolean;
+	public static final fun getUnknown ()Ljava/lang/Boolean;
+	public static final fun implies (Ljava/lang/Boolean;Ljava/lang/Boolean;)Ljava/lang/Boolean;
+	public static final fun isFalse (Ljava/lang/Boolean;)Z
+	public static final fun isKnown (Ljava/lang/Boolean;)Z
+	public static final fun isNotFalse (Ljava/lang/Boolean;)Z
+	public static final fun isNotTrue (Ljava/lang/Boolean;)Z
+	public static final fun isTrue (Ljava/lang/Boolean;)Z
+	public static final fun isUnknown (Ljava/lang/Boolean;)Z
+	public static final fun not (Ljava/lang/Boolean;)Ljava/lang/Boolean;
+	public static final fun or (Ljava/lang/Boolean;Ljava/lang/Boolean;)Ljava/lang/Boolean;
+	public static final fun xor (Ljava/lang/Boolean;Ljava/lang/Boolean;)Ljava/lang/Boolean;
+}
+
+public abstract interface class quest/laxla/gimli/util/Optional {
+	public static final field Companion Lquest/laxla/gimli/util/Optional$Companion;
+}
+
+public final class quest/laxla/gimli/util/Optional$Companion {
+	public final fun asOptional (Ljava/lang/Object;)Lquest/laxla/gimli/util/Optional;
+	public final fun asOptionalOrEmpty (Ljava/lang/Object;)Lquest/laxla/gimli/util/Optional;
+	public final fun getValue (Lquest/laxla/gimli/util/Optional;)Ljava/lang/Object;
+	public final fun getValueOrNull (Lquest/laxla/gimli/util/Optional;)Ljava/lang/Object;
+	public final fun of (Ljava/lang/Object;)Lquest/laxla/gimli/util/Optional;
+}
+
+public final class quest/laxla/gimli/util/Optional$Empty : quest/laxla/gimli/util/Optional {
+	public static final field INSTANCE Lquest/laxla/gimli/util/Optional$Empty;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class quest/laxla/gimli/util/Optional$Present : quest/laxla/gimli/util/Optional {
+	public static final synthetic fun box-impl (Ljava/lang/Object;)Lquest/laxla/gimli/util/Optional$Present;
+	public static fun constructor-impl (Ljava/lang/Object;)Ljava/lang/Object;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/Object;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/Object;Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/Object;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/Object;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/Object;
+}
+
+public final class quest/laxla/gimli/util/Optional_jvmKt {
+	public static final fun toGimliOptional (Ljava/util/Optional;)Lquest/laxla/gimli/util/Optional;
+	public static final fun toJavaOptional (Lquest/laxla/gimli/util/Optional;)Ljava/util/Optional;
+}
+
+public final class quest/laxla/gimli/util/Percentage : java/lang/Comparable {
+	public static final field Companion Lquest/laxla/gimli/util/Percentage$Companion;
+	public static final synthetic fun box-impl (F)Lquest/laxla/gimli/util/Percentage;
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun compareTo-chNTPGs (F)I
+	public static fun compareTo-chNTPGs (FF)I
+	public static final fun div-5aRBTzA (FF)F
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (FLjava/lang/Object;)Z
+	public static final fun equals-impl0 (FF)Z
+	public final fun getAsFraction ()F
+	public static final fun getAsInt-impl (F)I
+	public fun hashCode ()I
+	public static fun hashCode-impl (F)I
+	public static final fun minus-5aRBTzA (FF)F
+	public static final fun plus-5aRBTzA (FF)F
+	public static final fun times-5aRBTzA (FF)F
+	public static final fun times-syKgkc0 (FI)F
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (F)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()F
+}
+
+public final class quest/laxla/gimli/util/Percentage$Companion : kotlinx/serialization/KSerializer {
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize-syKgkc0 (Lkotlinx/serialization/encoding/Decoder;)F
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun getHundred-e1HjVl4 ()F
+	public final fun getPercent-syKgkc0 (I)F
+	public final fun getZero-e1HjVl4 ()F
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize-ZCA1XXQ (Lkotlinx/serialization/encoding/Encoder;F)V
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public final fun toPercentage-syKgkc0 (F)F
+}
+
+public final class quest/laxla/gimli/util/ResultKt {
+	public static final fun not (Ljava/lang/Throwable;)Ljava/lang/Object;
+}
+
+public final class quest/laxla/gimli/util/SerializationKt {
+	public static final fun getGimliJson ()Lkotlinx/serialization/json/Json;
+}
+
+public final class quest/laxla/gimli/util/StringsKt {
+	public static final field DotDotDot Ljava/lang/String;
+	public static final field Ellipsis C
+	public static final field QuoteDotDotDot Ljava/lang/String;
+	public static final field QuoteEllipsis Ljava/lang/String;
+	public static final fun emptyString ()Ljava/lang/String;
+	public static final fun endsWith (Ljava/lang/CharSequence;Lkotlin/text/Regex;I)Z
+	public static synthetic fun endsWith$default (Ljava/lang/CharSequence;Lkotlin/text/Regex;IILjava/lang/Object;)Z
+	public static final fun find (Ljava/lang/CharSequence;Lkotlin/text/Regex;I)Lkotlin/text/MatchResult;
+	public static synthetic fun find$default (Ljava/lang/CharSequence;Lkotlin/text/Regex;IILjava/lang/Object;)Lkotlin/text/MatchResult;
+	public static final fun findAll (Ljava/lang/CharSequence;Lkotlin/text/Regex;I)Lkotlin/sequences/Sequence;
+	public static synthetic fun findAll$default (Ljava/lang/CharSequence;Lkotlin/text/Regex;IILjava/lang/Object;)Lkotlin/sequences/Sequence;
+	public static final fun findLast (Ljava/lang/CharSequence;Lkotlin/text/Regex;I)Lkotlin/text/MatchResult;
+	public static synthetic fun findLast$default (Ljava/lang/CharSequence;Lkotlin/text/Regex;IILjava/lang/Object;)Lkotlin/text/MatchResult;
+	public static final fun ifBlankEmptyElse (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Ljava/lang/String;
+	public static final fun ifBlankOrNull (Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)V
+	public static final fun ifNotBlankNorNull (Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)V
+	public static final fun isNotNullNorBlank (Ljava/lang/CharSequence;)Z
+	public static final fun removePrefix (Ljava/lang/CharSequence;Lkotlin/text/Regex;)Ljava/lang/CharSequence;
+	public static final fun removePrefix (Ljava/lang/String;Lkotlin/text/Regex;)Ljava/lang/String;
+	public static final fun removeSuffix (Ljava/lang/CharSequence;Lkotlin/text/Regex;)Ljava/lang/CharSequence;
+	public static final fun removeSuffix (Ljava/lang/String;Lkotlin/text/Regex;)Ljava/lang/String;
+	public static final fun removeSurrounding (Ljava/lang/CharSequence;Lkotlin/text/Regex;Lkotlin/text/Regex;)Ljava/lang/CharSequence;
+	public static final fun removeSurrounding (Ljava/lang/String;Lkotlin/text/Regex;Lkotlin/text/Regex;)Ljava/lang/String;
+	public static final fun startsWith (Ljava/lang/CharSequence;Lkotlin/text/Regex;I)Z
+	public static synthetic fun startsWith$default (Ljava/lang/CharSequence;Lkotlin/text/Regex;IILjava/lang/Object;)Z
+	public static final fun substringAfter (Ljava/lang/CharSequence;Lkotlin/text/Regex;Ljava/lang/CharSequence;Z)Ljava/lang/CharSequence;
+	public static final fun substringAfter (Ljava/lang/String;Lkotlin/text/Regex;Ljava/lang/String;Z)Ljava/lang/String;
+	public static synthetic fun substringAfter$default (Ljava/lang/CharSequence;Lkotlin/text/Regex;Ljava/lang/CharSequence;ZILjava/lang/Object;)Ljava/lang/CharSequence;
+	public static synthetic fun substringAfter$default (Ljava/lang/String;Lkotlin/text/Regex;Ljava/lang/String;ZILjava/lang/Object;)Ljava/lang/String;
+	public static final fun substringAfterLast (Ljava/lang/CharSequence;Lkotlin/text/Regex;Ljava/lang/CharSequence;Z)Ljava/lang/CharSequence;
+	public static final fun substringAfterLast (Ljava/lang/String;Lkotlin/text/Regex;Ljava/lang/String;Z)Ljava/lang/String;
+	public static synthetic fun substringAfterLast$default (Ljava/lang/CharSequence;Lkotlin/text/Regex;Ljava/lang/CharSequence;ZILjava/lang/Object;)Ljava/lang/CharSequence;
+	public static synthetic fun substringAfterLast$default (Ljava/lang/String;Lkotlin/text/Regex;Ljava/lang/String;ZILjava/lang/Object;)Ljava/lang/String;
+	public static final fun substringBefore (Ljava/lang/CharSequence;Lkotlin/text/Regex;Ljava/lang/CharSequence;Z)Ljava/lang/CharSequence;
+	public static final fun substringBefore (Ljava/lang/String;Lkotlin/text/Regex;Ljava/lang/String;Z)Ljava/lang/String;
+	public static synthetic fun substringBefore$default (Ljava/lang/CharSequence;Lkotlin/text/Regex;Ljava/lang/CharSequence;ZILjava/lang/Object;)Ljava/lang/CharSequence;
+	public static synthetic fun substringBefore$default (Ljava/lang/String;Lkotlin/text/Regex;Ljava/lang/String;ZILjava/lang/Object;)Ljava/lang/String;
+	public static final fun substringBeforeLast (Ljava/lang/CharSequence;Lkotlin/text/Regex;Ljava/lang/CharSequence;Z)Ljava/lang/CharSequence;
+	public static final fun substringBeforeLast (Ljava/lang/String;Lkotlin/text/Regex;Ljava/lang/String;Z)Ljava/lang/String;
+	public static synthetic fun substringBeforeLast$default (Ljava/lang/CharSequence;Lkotlin/text/Regex;Ljava/lang/CharSequence;ZILjava/lang/Object;)Ljava/lang/CharSequence;
+	public static synthetic fun substringBeforeLast$default (Ljava/lang/String;Lkotlin/text/Regex;Ljava/lang/String;ZILjava/lang/Object;)Ljava/lang/String;
+	public static final fun toStringOrEmpty (Ljava/lang/Object;)Ljava/lang/String;
+	public static final fun trimmedAfter (Ljava/lang/CharSequence;ILjava/lang/CharSequence;)Ljava/lang/String;
+	public static final fun trimmedAfter (Ljava/lang/CharSequence;ILjava/lang/Character;)Ljava/lang/String;
+	public static synthetic fun trimmedAfter$default (Ljava/lang/CharSequence;ILjava/lang/CharSequence;ILjava/lang/Object;)Ljava/lang/String;
+	public static synthetic fun trimmedAfter$default (Ljava/lang/CharSequence;ILjava/lang/Character;ILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class quest/laxla/gimli/util/TextDirection : java/lang/Enum {
+	public static final field Companion Lquest/laxla/gimli/util/TextDirection$Companion;
+	public static final field LtR Lquest/laxla/gimli/util/TextDirection;
+	public static final field RtL Lquest/laxla/gimli/util/TextDirection;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lquest/laxla/gimli/util/TextDirection;
+	public static fun values ()[Lquest/laxla/gimli/util/TextDirection;
+}
+
+public final class quest/laxla/gimli/util/TextDirection$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+

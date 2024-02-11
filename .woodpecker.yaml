@@ -1,0 +1,20 @@
+when:
+  - event: push
+    branch: ${CI_REPO_DEFAULT_BRANCH}
+    repo: Laxystem/Gimli
+  - event: pull_request
+
+steps:
+  - name: build
+    image: gradle:8.6-jdk17
+    commands:
+      - ./gradlew build
+  - name: release
+    image: gradle:8.6-jdk17
+    when:
+      - event: push
+        branch: ${CI_REPO_DEFAULT_BRANCH}
+        repo: Laxystem/Gimli
+    commands:
+      - ./gradlew publish
+    secrets: [ codeberg packages ]
