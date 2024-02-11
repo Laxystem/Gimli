@@ -17,4 +17,4 @@ steps:
         repo: Laxystem/Gimli
     commands:
       - ./gradlew publish
-    secrets: [ codeberg packages ]
+    secrets: [ codeberg_create_packages_token ]
