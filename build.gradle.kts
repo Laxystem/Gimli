@@ -1,14 +1,14 @@
-import com.dorongold.gradle.tasktree.TaskTreePlugin
 import dev.yumi.gradle.licenser.YumiLicenserGradlePlugin
+import org.jetbrains.dokka.gradle.DokkaPlugin
 
 plugins {
     id("dev.yumi.gradle.licenser")
-    id("com.dorongold.task-tree") version "2.1.1"
+    id("org.jetbrains.dokka")
 }
 
 allprojects {
     apply<YumiLicenserGradlePlugin>()
-    apply<TaskTreePlugin>()
+    apply<DokkaPlugin>()
 
     version = project.properties["version"]!!
     group = "quest.laxla"

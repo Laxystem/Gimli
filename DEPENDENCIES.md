@@ -19,6 +19,8 @@ For a list of protocols implemented by Project: Gimli, see [FEDERATION.md](FEDER
 
 * **[Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform)** (Apache 2.0),
   a Kotlin UI framework developed by Google for Android, and ported to Kotlin/Multiplatform by JetBrains.
+* **[Dokka](https://GitHub.com/Kotlin/Dokka)** (`dokka`; Apache 2.0),
+  a documentation website generator for Kotlin.
 * **[Exposed](https://github.com/JetBrains/Exposed)** (`exposed`; Apache 2.0),
   SQL for Kotlin/JVM.
 * **[Extism](https://extism.org) Java [SDK](https://github.com/extism/java-sdk)** (BSD 3-Clause),

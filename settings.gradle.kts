@@ -12,6 +12,7 @@ include(
 )
 
 pluginManagement {
+    val dokka: String by settings
     val kotlin: String by settings
     val licenser: String by settings
 
@@ -21,9 +22,10 @@ pluginManagement {
     }
 
     plugins {
-        kotlin("multiplatform") version kotlin apply false
-        kotlin("jvm") version kotlin apply false
-        kotlin("plugin.serialization") version kotlin apply false
         id("dev.yumi.gradle.licenser") version licenser apply false
+        id("org.jetbrains.dokka") version dokka apply false
+        kotlin("jvm") version kotlin apply false
+        kotlin("multiplatform") version kotlin apply false
+        kotlin("plugin.serialization") version kotlin apply false
     }
 }
