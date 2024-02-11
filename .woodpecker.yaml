@@ -1,13 +1,14 @@
+when:
+  - event: push
+    branch: ${CI_REPO_DEFAULT_BRANCH}
+    repo: Laxystem/Gimli
+  - event: pull_request
+
 steps:
   - name: build
     image: gradle:8.6-jdk17
     commands:
       - ./gradlew build
-    when:
-      - event: push
-        branch: ${CI_REPO_DEFAULT_BRANCH}
-        repo: Laxystem/Gimli
-      - event: pull_request
   - name: release
     image: gradle:8.6-jdk17
     when:
