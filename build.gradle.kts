@@ -4,6 +4,7 @@ import org.jetbrains.dokka.gradle.DokkaPlugin
 plugins {
     id("dev.yumi.gradle.licenser")
     id("org.jetbrains.dokka")
+    kotlin("jvm") // only used for dokka
 }
 
 allprojects {
@@ -18,5 +19,11 @@ allprojects {
     license {
         rule(rootProject.file("HEADER.txt"))
         include("**/*.kt")
+    }
+
+    subprojects.forEach {
+        if (it.subprojects.isNotEmpty()) tasks.dokkaHtmlMultiModule {
+            dependsOn(it.tasks.dokkaHtmlMultiModule)
+        }
     }
 }

@@ -17,7 +17,6 @@ import io.ktor.server.resources.*
 import io.ktor.server.resources.Resources
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import quest.laxla.gimli.server.impl.ProfileProvider
 import quest.laxla.gimli.util.GimliJson
 import quest.laxla.gimli.util.ImmutableList
 import quest.laxla.gimli.util.emptyPersistentList
@@ -32,7 +31,7 @@ fun Application.webfinger() {
 
     routing {
         get<WebfingerRequest> {
-            ProfileProvider[it.resource]
+            //ProfileProvider[it.resource]
 
             call.respond(JsonResourceDescriptor(it.resource))
         }

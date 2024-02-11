@@ -64,7 +64,7 @@ fun <T : Comparable<T>> Table.nullableReference(
     fkName: String? = null,
     check: SqlExpressionBuilder.() -> Op<Boolean>
 ): Column<EntityID<T>?> = nullableReference(name, foreign, onDelete, onUpdate, fkName)
-    .check { it.isNull() or exists(foreign.select { it eq foreign.id }.andWhere(check)) }
+    .check { it.isNull() or exists(foreign.selectAll().where { foreign.id as ExpressionWithColumnType<*> eq it }.andWhere(check)) }
 
 fun <T : Comparable<T>> Table.reference(
     name: String,
@@ -74,7 +74,7 @@ fun <T : Comparable<T>> Table.reference(
     fkName: String? = null,
     check: SqlExpressionBuilder.() -> Op<Boolean>
 ): Column<EntityID<T>> = reference(name, foreign, onDelete, onUpdate, fkName).check {
-    exists(foreign.select { it eq foreign.id }.andWhere(check))
+    exists(foreign.selectAll().where { foreign.id as ExpressionWithColumnType<*> eq it }.andWhere(check))
 }
 
 infix fun <REF, ID, T> Column<REF>.referencing(entity: EntityClass<ID, T>) where REF : Comparable<REF>, ID : Comparable<ID>, T : Entity<ID> =

@@ -8,13 +8,8 @@
 
 package quest.laxla.gimli
 
-import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
-import quest.laxla.gimli.Ability.Companion.accessorPercentage
-import quest.laxla.gimli.Ability.Companion.actualMinimumVoterTurnout
 import quest.laxla.gimli.util.ImmutableList
-import quest.laxla.gimli.util.Maybe
-import quest.laxla.gimli.util.implies
 
 public interface Vote : Element.Federalized<Vote> { // TODO: add properties
     /**
@@ -88,38 +83,6 @@ public interface Vote : Element.Federalized<Vote> { // TODO: add properties
             }
 
             return Triple(affirmative, negative, negative)
-        }
-
-        /**
-         * Evaluate the results of this [Vote], returning `true` if it succeeded.
-         */
-        public fun Vote.evaluate(): Boolean {
-            val (affirmative, neutral, negative) = countResults()
-
-
-            val accessorPercentage = ability.accessorPercentage
-            val affirmativePercentage = accessorPercentage * affirmative
-            val neutralPercentage = accessorPercentage * neutral
-            val negativePercentage = accessorPercentage * negative
-
-            if (affirmative < ability.vote)
-
-            val voterTurnout =
-                if (ability.authorizable.isAllowingNeutralResponses) affirmativePercentage + neutralPercentage + negativePercentage
-                else affirmativePercentage + negativePercentage
-
-            return (ability.actualMinimumVoterTurnout <= voterTurnout) implies (affirmative > negative && affirmative >)
-        }
-
-        /**
-         * Returns the final results of this [Vote], if it ended already.
-         */
-        public fun Vote.finalResults(time: Instant = Clock.System.now()): Maybe = when {
-            actualEndTime != null -> evaluate()
-            isTimeLimited && plannedEndTime!! < time -> evaluate()
-            isAutomaticallyEvaluating -> {
-
-            }
         }
     }
 }

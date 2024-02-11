@@ -13,10 +13,8 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import quest.laxla.gimli.util.IetfBcp47
-import quest.laxla.gimli.util.LanguageCode
 import quest.laxla.gimli.util.Locale
 import quest.laxla.gimli.util.toLocale
-import java.util.*
 
 fun main() {
     val json = JsonLd.expand("https://mastodon.social/users/mastodon").loader(loader).get()!!

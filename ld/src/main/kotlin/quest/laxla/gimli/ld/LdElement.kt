@@ -10,10 +10,10 @@ package quest.laxla.gimli.ld
 
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.serialization.SerialName
-import quest.laxla.gimli.util.LanguageCode
 import quest.laxla.gimli.util.TextDirection
 import quest.laxla.gimli.ld.property.LdpID
 import quest.laxla.gimli.ld.property.LdpType
+import quest.laxla.gimli.util.IetfBcp47
 
 typealias Iri = String // TODO
 typealias LdType = String // TODO
@@ -27,7 +27,7 @@ interface LdElement<out T> : LdpType, LdpID where T : Any {
     val value: T?
 
     @SerialName("@language")
-    val language: LanguageCode?
+    val language: IetfBcp47?
 
     @SerialName("@direction")
     val textDirection: TextDirection?
