@@ -23,7 +23,7 @@ public typealias PersistentMap<K, V> = @Serializable(with = PersistentMapSeriali
 
 public fun <K, V> emptyPersistentMap(): PersistentMap<K, V> = persistentMapOf()
 
-public class ImmutableMapSerializer<K, V>(keySerializer: KSerializer<K>, valueSerializer: KSerializer<V>) : KSerializer<ImmutableMap<K, V>> {
+internal class ImmutableMapSerializer<K, V>(keySerializer: KSerializer<K>, valueSerializer: KSerializer<V>) : KSerializer<ImmutableMap<K, V>> {
     private val impl = MapSerializer(keySerializer, valueSerializer)
     override val descriptor: SerialDescriptor get() = impl.descriptor
 
@@ -32,7 +32,7 @@ public class ImmutableMapSerializer<K, V>(keySerializer: KSerializer<K>, valueSe
     override fun serialize(encoder: Encoder, value: ImmutableMap<K, V>): Unit = impl.serialize(encoder, value)
 }
 
-public class PersistentMapSerializer<K, V>(keySerializer: KSerializer<K>, valueSerializer: KSerializer<V>) : KSerializer<PersistentMap<K, V>> {
+internal class PersistentMapSerializer<K, V>(keySerializer: KSerializer<K>, valueSerializer: KSerializer<V>) : KSerializer<PersistentMap<K, V>> {
     private val impl = MapSerializer(keySerializer, valueSerializer)
     override val descriptor: SerialDescriptor get() = impl.descriptor
 

@@ -23,7 +23,7 @@ public typealias PersistentList<E> = @Serializable(with = PersistentListSerializ
 
 public fun <T> emptyPersistentList(): PersistentList<T> = persistentListOf()
 
-public class ImmutableListSerializer<E>(eSerializer: KSerializer<E>) : KSerializer<KtxImmutableList<E>> {
+internal class ImmutableListSerializer<E>(eSerializer: KSerializer<E>) : KSerializer<KtxImmutableList<E>> {
     private val impl = ListSerializer(eSerializer)
     override val descriptor: SerialDescriptor get() = impl.descriptor
 
@@ -32,7 +32,7 @@ public class ImmutableListSerializer<E>(eSerializer: KSerializer<E>) : KSerializ
     override fun serialize(encoder: Encoder, value: KtxImmutableList<E>): Unit = impl.serialize(encoder, value)
 }
 
-public class PersistentListSerializer<E>(eSerializer: KSerializer<E>) : KSerializer<KtxPersistentList<E>> {
+internal class PersistentListSerializer<E>(eSerializer: KSerializer<E>) : KSerializer<KtxPersistentList<E>> {
     private val impl = ListSerializer(eSerializer)
     override val descriptor: SerialDescriptor get() = impl.descriptor
 

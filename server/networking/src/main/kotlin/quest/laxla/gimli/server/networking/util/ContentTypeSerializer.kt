@@ -8,19 +8,22 @@
 
 package quest.laxla.gimli.server.networking.util
 
-import io.ktor.http.*
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import io.ktor.http.ContentType as KtorContentType
 
-object ContentTypeSerializer : KSerializer<ContentType> {
+typealias ContentType = @Serializable(with = ContentTypeSerializer::class) KtorContentType
+
+internal object ContentTypeSerializer : KSerializer<KtorContentType> {
     override val descriptor: SerialDescriptor
         get() = PrimitiveSerialDescriptor(ContentTypeSerializer::class.qualifiedName!!, PrimitiveKind.STRING)
 
-    override fun deserialize(decoder: Decoder): ContentType = ContentType.parse(decoder.decodeString())
+    override fun deserialize(decoder: Decoder): KtorContentType = KtorContentType.parse(decoder.decodeString())
 
-    override fun serialize(encoder: Encoder, value: ContentType) = encoder.encodeString(value.toString())
+    override fun serialize(encoder: Encoder, value: KtorContentType) = encoder.encodeString(value.toString())
 }

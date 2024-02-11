@@ -8,9 +8,8 @@
 
 package quest.laxla.gimli.server.networking.webfinger
 
-import io.ktor.http.*
 import kotlinx.serialization.Serializable
-import quest.laxla.gimli.server.networking.util.ContentTypeSerializer
+import quest.laxla.gimli.server.networking.util.ContentType
 import quest.laxla.gimli.util.IetfBcp47
 import quest.laxla.gimli.util.ImmutableMap
 import quest.laxla.gimli.util.emptyPersistentMap
@@ -18,7 +17,7 @@ import quest.laxla.gimli.util.emptyPersistentMap
 @Serializable
 data class JrdLink(
     val rel: String,
-    val type: @Serializable(with = ContentTypeSerializer::class) ContentType? = null,
+    val type: ContentType? = null,
     val href: String? = null,
     val titles: ImmutableMap<IetfBcp47, String> = emptyPersistentMap()
 )

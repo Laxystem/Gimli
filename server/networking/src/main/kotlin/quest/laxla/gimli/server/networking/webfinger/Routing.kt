@@ -8,7 +8,6 @@
 
 package quest.laxla.gimli.server.networking.webfinger
 
-import io.ktor.http.*
 import io.ktor.resources.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -17,6 +16,7 @@ import io.ktor.server.resources.*
 import io.ktor.server.resources.Resources
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import quest.laxla.gimli.server.networking.util.ContentType
 import quest.laxla.gimli.util.GimliJson
 import quest.laxla.gimli.util.ImmutableList
 import quest.laxla.gimli.util.emptyPersistentList
