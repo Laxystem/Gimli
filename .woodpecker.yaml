@@ -5,9 +5,7 @@ steps:
       - ./gradlew build
     when:
       - event: push
-        branch:
-          exclude: *
-          include: ${CI_REPO_DEFAULT_BRANCH}
+        branch: ${CI_REPO_DEFAULT_BRANCH}
         repo: Laxystem/Gimli
       - event: pull_request
   - name: release
