@@ -22,9 +22,14 @@ kotlin {
         jvmToolchain(jdk.toInt())
     }
 
-    @OptIn(ExperimentalWasmDsl::class) wasmJs().browser()
+    @OptIn(ExperimentalWasmDsl::class) wasmJs {
+        binaries.library()
+        browser()
+        nodejs()
+        d8()
+    }
 
     sourceSets.commonMain.dependencies {
-        api(project(path = ":util"))
+        api(gimliModule(path = ":util"))
     }
 }

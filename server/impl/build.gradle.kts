@@ -4,6 +4,6 @@ plugins {
 }
 
 dependencies {
-    api(project(":api:server"))
-    implementation(project(":server:database"))
+    api(gimliModule(":api:server"))
+    implementation(gimliModule(":server:database"))
 }

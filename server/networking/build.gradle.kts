@@ -12,5 +12,5 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:$ktor")
     implementation("io.ktor:ktor-server-resources:$ktor")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization")
-    implementation(project(":server:impl"))
+    implementation(gimliModule(":server:impl"))
 }

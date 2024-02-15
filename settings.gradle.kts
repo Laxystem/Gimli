@@ -1,15 +1,17 @@
 rootProject.name = "Gimli"
 
-include(
-    "util",
-    "api:common",
-    "api:client",
-    "api:server",
-    "ld",
-    "server:database",
-    "server:impl",
-    "server:networking",
-)
+"util"()
+"api" {
+    "common"()
+    "client"()
+    "server"()
+}
+"ld"()
+"server" {
+    "database"()
+    "impl"()
+    "networking"()
+}
 
 pluginManagement {
     val abi: String by settings
@@ -33,3 +35,21 @@ pluginManagement {
         kotlin("plugin.serialization") version kotlin apply false
     }
 }
+
+// region Boring fancy DSL stuff
+data class Module(val name: String, val path: String) {
+    inline operator fun String.invoke(submodules: Module.() -> Unit = {}) = this(parentModule = this@Module, submodules)
+}
+
+inline operator fun String.invoke(parentModule: Module? = null, submodules: Module.() -> Unit = {}) {
+    val fullPath = parentModule?.path.orEmpty() + ':' + this
+
+    include(fullPath)
+
+    val project = project(fullPath)
+    val fullName = parentModule?.let { "${it.name}-" }.orEmpty() + this
+
+    project.name = fullName
+    Module(fullName, fullPath).submodules()
+}
+// endregion

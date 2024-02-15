@@ -59,6 +59,8 @@ For a list of protocols implemented by Project: Gimli, see [FEDERATION.md](FEDER
   an implementation of the SLF4J API.
 * **[Multiplatform Markdown Renderer](https://github.com/mikepenz/multiplatform-markdown-renderer)** (Apache 2.0),
   a Compose Multiplatform Markdown renderer.
+* **[Okio](https://square.github.io/okio)** (Apache 2.0),
+  an unofficial Kotlin/Multiplatform IO library, to be replaced by the official KotlinX IO.
 * **[OpenMLS](https://openmls.tech)** (MIT),
   an implementation of the Messaging Layer Security protocol written in Rust.
 * **[PGJDBC-NG](https://impossibl.github.io/pgjdbc-ng/)** (`postgres`; Custom),

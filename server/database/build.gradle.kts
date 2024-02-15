@@ -13,6 +13,6 @@ dependencies {
     api("org.jetbrains.exposed:exposed-dao:$exposed")
     api("org.jetbrains.exposed:exposed-jdbc:$exposed")
     api("org.jetbrains.exposed:exposed-kotlin-datetime:$exposed")
-    api(project(":api:server"))
+    api(gimliModule(":api:server"))
     implementation("com.impossibl.pgjdbc-ng:pgjdbc-ng:$postgres")
 }

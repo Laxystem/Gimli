@@ -10,32 +10,28 @@ plugins {
     id("org.jetbrains.dokka")
     id("org.jetbrains.kotlinx.binary-compatibility-validator")
     id("org.jetbrains.kotlinx.kover")
-    kotlin("jvm") // only used for dokka
     publishing
 }
 
 buildscript {
     val dokka: String by project
+    val kotlin: String by project
 
     dependencies {
         classpath("org.jetbrains.dokka:dokka-base:$dokka")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin")
     }
-}
-
-tasks.build {
-    dependsOn(tasks.applyLicenses)
 }
 
 apiValidation {
     apiDumpDirectory = "abi"
-    ignoredProjects += project.name
 }
 
 allprojects {
-    apply<YumiLicenserGradlePlugin>()
     apply<DokkaPlugin>()
     apply<KoverGradlePlugin>()
     apply<MavenPublishPlugin>()
+    apply<YumiLicenserGradlePlugin>()
 
     version = rootProject.properties["version"]!!
     group = "quest.laxla.gimli"
@@ -46,6 +42,8 @@ allprojects {
         rule(rootProject.file("HEADER.txt"))
         include("**/*.kt")
     }
+
+    tasks.findByName("build")?.dependsOn(tasks.applyLicenses)
 
     subprojects.forEach {
         if (it.subprojects.isNotEmpty()) tasks.dokkaHtmlMultiModule {

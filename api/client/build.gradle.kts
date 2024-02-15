@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-    api(project(":api:common"))
+    api(gimliModule(":api:common"))
 }
