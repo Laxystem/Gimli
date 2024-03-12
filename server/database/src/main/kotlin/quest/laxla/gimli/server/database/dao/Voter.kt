@@ -10,15 +10,10 @@ package quest.laxla.gimli.server.database.dao
 
 import org.jetbrains.exposed.dao.LongEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
-import org.jetbrains.exposed.sql.ReferenceOption
 import quest.laxla.gimli.server.database.FederalEntity
-import quest.laxla.gimli.server.database.referencing
 
-class Railway(id: EntityID<Long>) : FederalEntity(id, Table) {
-    val guild by Table.guild referencing Guild
+class Voter(id: EntityID<Long>) : FederalEntity(id, Table) {
 
-    companion object : LongEntityClass<Railway>(Table)
-    object Table : FederalEntity.Table() {
-        val guild = reference(name = "guild_id", Guild.Table, onDelete = ReferenceOption.CASCADE)
-    }
+    companion object : LongEntityClass<Voter>(Table)
+    object Table : FederalEntity.Table()
 }

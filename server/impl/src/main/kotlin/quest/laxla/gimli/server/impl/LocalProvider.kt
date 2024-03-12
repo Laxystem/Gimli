@@ -6,8 +6,12 @@
  * Copyright (C) 2024 Project Gimli and Contributors.
  */
 
-package quest.laxla.gimli.server
+package quest.laxla.gimli.server.impl
 
-public interface Informer {
-    public fun federalIdentifierOf(numeralIdentifier: Long): String
+import quest.laxla.gimli.Element
+
+internal interface LocalProvider<T, in Dao> : Element.Provider<T> where T : Element<T> {
+    val instance: GimliInstance
+
+    fun convert(voter: Dao): T
 }

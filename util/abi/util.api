@@ -21,11 +21,6 @@ public final class quest/laxla/gimli/util/CatchingFlowKt {
 	public static final fun iterableToFlowCatching (Ljava/lang/Iterable;)Lkotlinx/coroutines/flow/Flow;
 }
 
-public final class quest/laxla/gimli/util/DomainsKt {
-	public static final fun extractDomain (Ljava/lang/String;)Ljava/lang/String;
-	public static final fun isOfDomain (Ljava/lang/String;Ljava/lang/String;)Z
-}
-
 public final class quest/laxla/gimli/util/EnvKt {
 	public static final fun env (Ljava/lang/String;)Lkotlin/properties/ReadOnlyProperty;
 	public static final fun getEnv ()Lkotlin/properties/ReadOnlyProperty;
@@ -169,8 +164,7 @@ public final class quest/laxla/gimli/util/StringsKt {
 	public static synthetic fun findAll$default (Ljava/lang/CharSequence;Lkotlin/text/Regex;IILjava/lang/Object;)Lkotlin/sequences/Sequence;
 	public static final fun findLast (Ljava/lang/CharSequence;Lkotlin/text/Regex;I)Lkotlin/text/MatchResult;
 	public static synthetic fun findLast$default (Ljava/lang/CharSequence;Lkotlin/text/Regex;IILjava/lang/Object;)Lkotlin/text/MatchResult;
-	public static final fun ifBlankEmptyElse (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Ljava/lang/String;
-	public static final fun ifBlankOrNull (Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)V
+	public static final fun ifBlankOrNull (Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)Ljava/lang/CharSequence;
 	public static final fun ifNotBlankNorNull (Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)V
 	public static final fun isNotNullNorBlank (Ljava/lang/CharSequence;)Z
 	public static final fun removePrefix (Ljava/lang/CharSequence;Lkotlin/text/Regex;)Ljava/lang/CharSequence;
@@ -215,5 +209,11 @@ public final class quest/laxla/gimli/util/TextDirection : java/lang/Enum {
 
 public final class quest/laxla/gimli/util/TextDirection$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class quest/laxla/gimli/util/UriKt {
+	public static final fun appendToPath (Lcom/eygraber/uri/Builder;Ljava/lang/Iterable;)V
+	public static final fun setAuthority (Lcom/eygraber/uri/Builder;Ljava/lang/String;ILjava/lang/String;)Lcom/eygraber/uri/Builder;
+	public static synthetic fun setAuthority$default (Lcom/eygraber/uri/Builder;Ljava/lang/String;ILjava/lang/String;ILjava/lang/Object;)Lcom/eygraber/uri/Builder;
 }
 

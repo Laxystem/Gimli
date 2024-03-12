@@ -15,12 +15,17 @@ import org.jetbrains.exposed.dao.id.LongIdTable
 import org.jetbrains.exposed.sql.ReferenceOption
 import quest.laxla.gimli.server.database.*
 
-class Authorizable(id: EntityID<Long>) : LongEntity(id) {
-    val identifier by Table.identifier referencing FederalIdentifier
+class PostTag(id: EntityID<Long>) : LongEntity(id) {
+    val post by Table.post referencing Post
+    val tag by Table.tag referencing Tag
 
-    companion object : LongEntityClass<Authorizable>(Table)
-    object Identifier : FederalIdentification.Companion<Authorizable>(Authorizable)
+    companion object : LongEntityClass<PostTag>(Table)
     object Table : LongIdTable() {
-        val identifier = reference(name = "identifier_id", FederalIdentifier.Table, onDelete = ReferenceOption.RESTRICT)
+        val post = reference(name = "post_id", Post.Table, onDelete = ReferenceOption.CASCADE)
+        val tag = reference(name = "tag_id", Tag.Table, onDelete = ReferenceOption.RESTRICT)
+
+        init {
+            uniqueIndex(post, tag)
+        }
     }
 }

@@ -13,16 +13,16 @@ import quest.laxla.gimli.util.Percentage.Companion.toPercentage
 import kotlin.time.Duration
 
 /**
- * Represents [Accessor]s' ability to use [permission] on the [authorizable].
+ * Represents [Voter]s' ability to use [permission] on the [topic].
  */
 public interface Ability : Element<Ability> {
     /**
-     * The [Authorizable] the [permission] is performed on.
+     * The [Topic] the [permission] is performed on.
      */
-    public val authorizable: Authorizable
+    public val topic: Topic
 
     /**
-     * The [Permission] performed on the [authorizable].
+     * The [Permission] performed on the [topic].
      */
     public val permission: String
 
@@ -30,48 +30,48 @@ public interface Ability : Element<Ability> {
      * The length of [Vote]s invoking this [Ability].
      *
      * [Vote]s may treat this as a *default*
-     * if [authorizable] allows [custom vote lengths][Authorizable.isAllowingCustomVoteLength].
+     * if [topic] allows [custom vote lengths][Topic.isAllowingCustomVoteLength].
      *
-     * `null` means this ability uses the [default][Authorizable.defaultVoteLength].
+     * `null` means this ability uses the [default][Topic.defaultVoteLength].
      */
     public val voteLength: Duration?
 
     /**
-     * The [minimum voter turnout][Authorizable.defaultMinimumVoterTurnout] of [Vote]s invoking this [Ability].
+     * The [minimum voter turnout][Topic.defaultMinimumVoterTurnout] of [Vote]s invoking this [Ability].
      *
-     * `null` means this ability uses the [default][Authorizable.defaultMinimumVoterTurnout].
+     * `null` means this ability uses the [default][Topic.defaultMinimumVoterTurnout].
      */
     public val minimumVoterTurnout: Percentage?
 
     /**
-     * The amount of [Accessor]s that have access to this ability.
+     * The amount of [Voter]s that have access to this ability.
      */
     public val accessorCount: Int
 
     /**
      * Is [accessor] authorized to perform this ability *directly*?
      */
-    public suspend fun isAuthorized(accessor: Accessor): Boolean
+    public suspend fun isAuthorized(accessor: Voter): Boolean
 
     public companion object {
 
         /**
          * The actual length a vote will take, if known.
          *
-         * @see Authorizable.defaultVoteLength
+         * @see Topic.defaultVoteLength
          */
-        public val Ability.actualVoteLength: Duration get() = voteLength ?: authorizable.defaultVoteLength
+        public val Ability.actualVoteLength: Duration get() = voteLength ?: topic.defaultVoteLength
 
         /**
          * The minimum voter turnout, if known.
          *
-         * @see Authorizable.defaultMinimumVoterTurnout
+         * @see Topic.defaultMinimumVoterTurnout
          */
         public val Ability.actualMinimumVoterTurnout: Percentage
-            get() = minimumVoterTurnout ?: authorizable.defaultMinimumVoterTurnout
+            get() = minimumVoterTurnout ?: topic.defaultMinimumVoterTurnout
 
         /**
-         * The percentage of votes a single [Accessor] represents.
+         * The percentage of votes a single [Voter] represents.
          */
         public val Ability.accessorPercentage: Percentage get() = (1f / accessorCount).toPercentage()
     }

@@ -13,33 +13,33 @@ package quest.laxla.gimli
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.Serializable
 
-public sealed interface Guild : Element.Federalized<Guild> {
+public interface Guild : Element<Guild> {
     /**
      * This Guild's anonymous posting [Profile].
      */
     @Specification.Compliance(Specification.ActivityPub, name = "actor")
-    public val profile: Profile
+    public val profile: Ref<Profile>
 
     /**
      * The default [Railway] permissions.
      *
      * Guilds also have additional, unique permissions that are stored in this property.
-     * Permissions for the Guild's anonymous profile can be found at [profile].[authorizable][Profile.authorizable].
+     * Permissions for the Guild's anonymous profile can be found at [profile].[authorizable][Profile.topic].
      */
-    public val authorizable: Authorizable
+    public val defaultRailwayPermissions: Ref<Topic>
 
     /**
      * The [Tag]s this Guild has claimed.
      */
     @Specification.Compliance(Specification.ActivityPub, name = "tag")
-    public val tags: Flow<Tag>
+    public val tags: Flow<Tag> // TODO
 
-    public fun claim(tag: Ref<Tag>)
+    public fun claim(tag: Ref<Tag>) // TODO
 
-    public suspend fun claimAndGet(tag: Ref<Tag>)
+    public suspend fun claimAndGet(tag: Ref<Tag>) // TODO
 
     @Serializable
-    public data class CreateBuilder(var profile: Profile) : Element.Builder.Create<CreateBuilder> {
+    public data class CreateBuilder(val profile: Profile) : Element.Builder.Create<CreateBuilder> {
         override fun clone(): CreateBuilder = copy()
     }
 }

@@ -8,14 +8,12 @@
 
 package quest.laxla.gimli.server.database.dao
 
-import org.jetbrains.exposed.dao.LongEntity
 import org.jetbrains.exposed.dao.LongEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
-import org.jetbrains.exposed.dao.id.LongIdTable
-import quest.laxla.gimli.server.database.FederalIdentification
+import quest.laxla.gimli.server.database.FederalEntity
 
-class Accessor(id: EntityID<Long>) : LongEntity(id) {
-    companion object : LongEntityClass<Accessor>(Table)
-    class Identifier : FederalIdentification.Companion<Accessor>(Accessor)
-    object Table : LongIdTable()
+class Topic(id: EntityID<Long>) : FederalEntity(id, Table) {
+
+    companion object : LongEntityClass<Topic>(Table)
+    object Table : FederalEntity.Table()
 }

@@ -8,14 +8,15 @@
 
 package quest.laxla.gimli
 
+import com.eygraber.uri.Uri
 import kotlinx.serialization.Serializable
 import quest.laxla.gimli.util.*
 import kotlin.time.Duration
 
 /**
- * Represents something that [Accessor]s can have [Permission]s at.
+ * Represents something that [Voter]s can have [Permission]s at.
  */
-public interface Authorizable : Element.Federalized<Authorizable> {
+public interface Topic : Element<Topic> {
     // TODO: refine federated democracy to match FEP-5a4f
     /**
      * The minimum and maximum time a time-limited vote may last.
@@ -44,7 +45,7 @@ public interface Authorizable : Element.Federalized<Authorizable> {
     public val defaultVoteSuccessPercentage: Percentage
 
     /**
-     * The default percent of [Accessor]s that need to vote for the vote to succeed.
+     * The default percent of [Voter]s that need to vote for the vote to succeed.
      *
      * Overridable by [Abilities][Ability].
      *
@@ -53,21 +54,21 @@ public interface Authorizable : Element.Federalized<Authorizable> {
     public val defaultMinimumVoterTurnout: Percentage
 
     /**
-     * Allows [Accessor]s with the [Permission.Veto] permission to force a vote to fail.
+     * Allows [Voter]s with the [Permission.Veto] permission to force a vote to fail.
      *
      * It is the client's responsibility to handle [Unknown] values.
      */
     public val isAllowingVetoes: Boolean
 
     /**
-     * Allows [Accessor]s with the [Permission.Bypass] permission to force a vote to succeed.
+     * Allows [Voter]s with the [Permission.Bypass] permission to force a vote to succeed.
      *
      * It is the client's responsibility to handle [Unknown] values.
      */
     public val isAllowingBypasses: Boolean
 
     /**
-     * Allows [Accessor]s to force votes they've created to fail.
+     * Allows [Voter]s to force votes they've created to fail.
      *
      * It is the client's responsibility to handle [Unknown] values.
      */
@@ -134,33 +135,33 @@ public interface Authorizable : Element.Federalized<Authorizable> {
     public val isAllowingTimeUnlimitedVoteResponseChange: Boolean
 
     /**
-     * Gets the [Ability] of this [Authorizable] to perform [permission].
+     * Gets the [Ability] of this [Topic] to perform [permission].
      */
     public suspend fun getAbility(permission: Permission)
 
     @Serializable
     public data class UpdateBuilder(
-        override val primaryFederalIdentifier: String,
-        public var minimumAllowedVoteLength: Optional<Int> = Optional.Empty,
-        public var maximumAllowedVoteLength: Optional<Int> = Optional.Empty,
-        public var defaultVoteLength: Optional<Duration> = Optional.Empty,
-        public var minimumVoterTurnout: Optional<Percentage> = Optional.Empty,
-        public var isAllowingVetoes: Optional<Boolean> = Optional.Empty,
-        public var isAllowingBypasses: Optional<Boolean> = Optional.Empty,
-        public var isAllowingRetraction: Optional<Boolean> = Optional.Empty,
-        public var isAllowingNeutralResponses: Optional<Boolean> = Optional.Empty,
-        public var isAllowingTimeUnlimitedVotes: Optional<Boolean> = Optional.Empty,
-        public var publishVoteResponses: Optional<Boolean> = Optional.Empty,
-        public var isAutomaticallyEvaluatingTimeLimitedVotes: Optional<Boolean> = Optional.Empty,
-        public var voteTimeoutResult: Optional<Vote.TimeoutResult> = Optional.Empty,
-        public var isAutomaticallyEvaluatingTimeUnlimitedVotes: Optional<Boolean> = Optional.Empty,
-        public var isAllowingTimeUnlimitedVoteResponseChange: Optional<Boolean> = Optional.Empty,
+        override val primaryFederalIdentifier: Uri,
+        public val minimumAllowedVoteLength: Optional<Int> = Optional.Empty,
+        public val maximumAllowedVoteLength: Optional<Int> = Optional.Empty,
+        public val defaultVoteLength: Optional<Duration> = Optional.Empty,
+        public val minimumVoterTurnout: Optional<Percentage> = Optional.Empty,
+        public val isAllowingVetoes: Optional<Boolean> = Optional.Empty,
+        public val isAllowingBypasses: Optional<Boolean> = Optional.Empty,
+        public val isAllowingRetraction: Optional<Boolean> = Optional.Empty,
+        public val isAllowingNeutralResponses: Optional<Boolean> = Optional.Empty,
+        public val isAllowingTimeUnlimitedVotes: Optional<Boolean> = Optional.Empty,
+        public val publishVoteResponses: Optional<Boolean> = Optional.Empty,
+        public val isAutomaticallyEvaluatingTimeLimitedVotes: Optional<Boolean> = Optional.Empty,
+        public val voteTimeoutResult: Optional<Vote.TimeoutResult> = Optional.Empty,
+        public val isAutomaticallyEvaluatingTimeUnlimitedVotes: Optional<Boolean> = Optional.Empty,
+        public val isAllowingTimeUnlimitedVoteResponseChange: Optional<Boolean> = Optional.Empty,
     ) : Element.Builder.Update<UpdateBuilder> {
         override fun clone(): UpdateBuilder = this
     }
 
     public companion object {
-        public val Authorizable.isValid: Boolean
+        public val Topic.isValid: Boolean
             get() = allowedVoteLength.start >= Duration.ZERO
                     && if (defaultVoteLength == Duration.INFINITE) isAllowingTimeIndependentVotes else defaultVoteLength in allowedVoteLength
     }

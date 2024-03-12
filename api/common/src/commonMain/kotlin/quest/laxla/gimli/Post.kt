@@ -10,21 +10,23 @@
 
 package quest.laxla.gimli
 
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.Serializable
 import quest.laxla.gimli.util.ImmutableList
 import quest.laxla.gimli.util.IetfBcp47
+import quest.laxla.gimli.util.PersistentList
 import quest.laxla.gimli.util.emptyString
 
 @Specification.Compliance(Specification.ActivityPub, name = "Note")
-public interface Post : Element.Federalized<Post> {
+public interface Post : Element<Post> {
     @Specification.Compliance(Specification.ActivityPub, name = "attributedTo")
-    public val author: Profile
+    public val author: Ref<Profile>
 
-    public val railway: Railway?
+    public val railway: Ref<Railway>?
 
     @Specification.Compliance(Specification.ActivityPub, name = "inReplyTo")
-    public val replyTo: Post?
+    public val replyTo: Ref<Post>?
 
     @Specification.Compliance(Specification.ActivityPub, name = "tag")
     public val tags: ImmutableList<Ref<Tag>>
@@ -41,11 +43,11 @@ public interface Post : Element.Federalized<Post> {
     public val knownRevisions: ImmutableList<Revision>
     public val revisions: Flow<Revision>
 
-    public fun addTo(tag: String, accessor: Accessor)
-    public fun removeFrom(tag: String, accessor: Accessor)
+    public fun addTo(tag: String, voter: Voter)
+    public fun removeFrom(tag: String, voter: Voter)
 
-    public suspend fun addToAndGet(tag: String, accessor: Accessor): Post
-    public suspend fun removeFromAndGet(tag: String, accessor: Accessor): Post
+    public suspend fun addToAndGet(tag: String, voter: Voter): Post
+    public suspend fun removeFromAndGet(tag: String, voter: Voter): Post
 
     public fun removeRailway()
 
@@ -53,14 +55,14 @@ public interface Post : Element.Federalized<Post> {
 
     @Serializable
     public data class CreateBuilder(
-        var author: Profile,
-        var replyTo: Post? = null,
-        var railway: Railway? = null,
-        var title: String = emptyString(),
-        var summary: String = emptyString(),
-        var body: String = emptyString(),
-        val tags: MutableList<Ref<Tag>> = mutableListOf(),
-        val explicitMentions: MutableList<Ref<Profile>> = mutableListOf()
+        val author: Ref<Profile>,
+        val replyTo: Post? = null,
+        val railway: Railway? = null,
+        val title: String = emptyString(),
+        val summary: String = emptyString(),
+        val body: String = emptyString(),
+        val tags: PersistentList<Ref<Tag>> = persistentListOf(),
+        val explicitMentions: PersistentList<Ref<Profile>> = persistentListOf()
     ) : Element.Builder.Create<CreateBuilder> {
         override fun clone(): CreateBuilder = copy()
     }
@@ -80,11 +82,11 @@ public interface Post : Element.Federalized<Post> {
 
         @Serializable
         public data class CreateBuilder(
-            var post: Post,
-            var language: IetfBcp47,
-            var title: String = emptyString(),
-            var summary: String = emptyString(),
-            var contents: String = emptyString()
+            val post: Post,
+            val language: IetfBcp47,
+            val title: String = emptyString(),
+            val summary: String = emptyString(),
+            val contents: String = emptyString()
         ) : Element.Builder.Create<CreateBuilder> {
             override fun clone(): CreateBuilder = copy()
         }

@@ -17,11 +17,11 @@ import quest.laxla.gimli.server.database.*
 
 class Guild(id: EntityID<Long>) : LongEntity(id) {
     val profile by Table.profile referencing Profile
-    val defaultRailwayAuthorizable by Table.defaultRailwayAuthorizable referencing Authorizable
+    val defaultRailwayTopic by Table.defaultRailwayTopic referencing Topic
 
     companion object : LongEntityClass<Guild>(Table)
     object Table : LongIdTable() {
         val profile = reference(name = "profile_id", Profile.Table, onDelete = ReferenceOption.RESTRICT).uniqueIndex()
-        val defaultRailwayAuthorizable = reference(name = "default_railway_authorizable_id", Authorizable.Table, onDelete = ReferenceOption.RESTRICT).uniqueIndex()
+        val defaultRailwayTopic = reference(name = "default_railway_topic_id", Topic.Table, onDelete = ReferenceOption.RESTRICT).uniqueIndex()
     }
 }

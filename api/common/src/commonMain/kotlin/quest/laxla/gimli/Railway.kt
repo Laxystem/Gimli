@@ -10,12 +10,13 @@
 
 package quest.laxla.gimli
 
+import com.eygraber.uri.Uri
 import kotlinx.serialization.Serializable
 import quest.laxla.gimli.util.Maybe
 import quest.laxla.gimli.util.Optional
 import quest.laxla.gimli.util.emptyString
 
-public interface Railway {
+public interface Railway : Element<Railway> {
     public val guild: Guild
 
     @Specification.Compliance(Specification.ActivityPub, name = "name")
@@ -29,19 +30,19 @@ public interface Railway {
     @Serializable
     public data class CreateBuilder(
         val guild: Guild,
-        var description: String = emptyString(),
-        var displayName: String = emptyString(),
-        var startFromTop: Boolean = false
+        val description: String = emptyString(),
+        val displayName: String = emptyString(),
+        val startFromTop: Boolean = false
     ) : Element.Builder.Create<CreateBuilder> {
         override fun clone(): CreateBuilder = copy()
     }
 
     @Serializable
     public data class UpdateBuilder(
-        override val primaryFederalIdentifier: String,
-        var description: Optional<String> = Optional.Empty,
-        var displayName: Optional<String> = Optional.Empty,
-        var startFromTop: Optional<Boolean> = Optional.Empty
+        override val primaryFederalIdentifier: Uri,
+        val description: Optional<String> = Optional.Empty,
+        val displayName: Optional<String> = Optional.Empty,
+        val startFromTop: Optional<Boolean> = Optional.Empty
     ) : Element.Builder.Update<UpdateBuilder> {
         override fun clone(): UpdateBuilder = copy()
     }

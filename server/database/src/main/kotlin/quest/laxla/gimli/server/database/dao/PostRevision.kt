@@ -13,21 +13,26 @@ import org.jetbrains.exposed.dao.LongEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.LongIdTable
 import org.jetbrains.exposed.sql.ReferenceOption
-import quest.laxla.gimli.server.database.*
+import quest.laxla.gimli.server.database.creationTime
+import quest.laxla.gimli.server.database.dao.Follow.Companion.referrersOn
+import quest.laxla.gimli.server.database.reference
+import quest.laxla.gimli.server.database.referencing
 
-class Message(id: EntityID<Long>) : LongEntity(id) {
-    val author by Table.author referencing Profile
+class PostRevision(id: EntityID<Long>): LongEntity(id) {
+    val post by Table.post referencing Post
+    val title by Table.title
+    val summary by Table.summary
     val content by Table.content
+    val locale by Table.locale
     val creationTime by Table.creationTime
-    val quotedMessage by Table.quotedMessage referencingNullable Message
-    val railway by Table.railway referencingNullable Railway
 
-    companion object : LongEntityClass<Message>(Table)
+    companion object : LongEntityClass<PostRevision>(Table)
     object Table : LongIdTable() {
-        val author = reference(name = "author_profile_id", Profile.Table, onDelete = ReferenceOption.CASCADE)
+        val post = reference(name = "post_id", Post.Table, onDelete = ReferenceOption.CASCADE)
+        val title = text(name = "title")
+        val summary = text(name = "summary")
         val content = text(name = "content")
+        val locale = varchar(name = "locale", length = 35)
         val creationTime = creationTime()
-        val quotedMessage = nullableReference(name = "quoted_message_id", foreign = this, onDelete = ReferenceOption.CASCADE)
-        val railway = nullableReference(name = "railway_id", Railway.Table, onDelete = ReferenceOption.SET_NULL)
     }
 }

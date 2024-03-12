@@ -1,0 +1,68 @@
+public final class quest/laxla/gimli/server/impl/GimliInstance {
+	public final fun getDatabase ()Lorg/jetbrains/exposed/sql/Database;
+	public final fun getIdentifierManager ()Lquest/laxla/gimli/server/impl/IdentifierManager;
+}
+
+public abstract interface class quest/laxla/gimli/server/impl/IdentifierManager {
+	public static final field Acct Ljava/lang/String;
+	public static final field Companion Lquest/laxla/gimli/server/impl/IdentifierManager$Companion;
+	public static final field Https Ljava/lang/String;
+	public static final field localhost Ljava/lang/String;
+	public abstract fun builder (Ljava/lang/String;)Lcom/eygraber/uri/Builder;
+	public abstract fun createURI (Ljava/lang/String;Ljava/lang/Boolean;)Lcom/eygraber/uri/Uri;
+	public abstract fun getPrimaryHost ()Ljava/lang/String;
+	public abstract fun isLocal (Lcom/eygraber/uri/Uri;)Z
+	public abstract fun standardize (Lcom/eygraber/uri/Uri;Ljava/lang/Boolean;)Lcom/eygraber/uri/Uri;
+}
+
+public final class quest/laxla/gimli/server/impl/IdentifierManager$Companion {
+	public static final field Acct Ljava/lang/String;
+	public static final field Https Ljava/lang/String;
+	public static final field localhost Ljava/lang/String;
+	public final fun build (Lquest/laxla/gimli/server/impl/IdentifierManager;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/eygraber/uri/Uri;
+	public static synthetic fun build$default (Lquest/laxla/gimli/server/impl/IdentifierManager$Companion;Lquest/laxla/gimli/server/impl/IdentifierManager;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/eygraber/uri/Uri;
+}
+
+public final class quest/laxla/gimli/server/impl/IdentifierManager$DefaultImpls {
+	public static synthetic fun builder$default (Lquest/laxla/gimli/server/impl/IdentifierManager;Ljava/lang/String;ILjava/lang/Object;)Lcom/eygraber/uri/Builder;
+	public static fun createURI (Lquest/laxla/gimli/server/impl/IdentifierManager;Ljava/lang/String;Ljava/lang/Boolean;)Lcom/eygraber/uri/Uri;
+	public static synthetic fun createURI$default (Lquest/laxla/gimli/server/impl/IdentifierManager;Ljava/lang/String;Ljava/lang/Boolean;ILjava/lang/Object;)Lcom/eygraber/uri/Uri;
+	public static synthetic fun standardize$default (Lquest/laxla/gimli/server/impl/IdentifierManager;Lcom/eygraber/uri/Uri;Ljava/lang/Boolean;ILjava/lang/Object;)Lcom/eygraber/uri/Uri;
+}
+
+public final class quest/laxla/gimli/server/impl/IdentifierManager$Simple : quest/laxla/gimli/server/impl/IdentifierManager {
+	public fun <init> (Ljava/lang/String;Lkotlinx/collections/immutable/ImmutableList;)V
+	public fun <init> (Ljava/lang/String;[Ljava/lang/String;)V
+	public fun builder (Ljava/lang/String;)Lcom/eygraber/uri/Builder;
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Lkotlinx/collections/immutable/ImmutableList;)Lquest/laxla/gimli/server/impl/IdentifierManager$Simple;
+	public static synthetic fun copy$default (Lquest/laxla/gimli/server/impl/IdentifierManager$Simple;Ljava/lang/String;Lkotlinx/collections/immutable/ImmutableList;ILjava/lang/Object;)Lquest/laxla/gimli/server/impl/IdentifierManager$Simple;
+	public fun createURI (Ljava/lang/String;Ljava/lang/Boolean;)Lcom/eygraber/uri/Uri;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getPrimaryHost ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun isLocal (Lcom/eygraber/uri/Uri;)Z
+	public fun standardize (Lcom/eygraber/uri/Uri;Ljava/lang/Boolean;)Lcom/eygraber/uri/Uri;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class quest/laxla/gimli/server/impl/ProfileProvider : quest/laxla/gimli/Element$Provider, quest/laxla/gimli/server/impl/LocalProvider {
+	public fun <init> (Lquest/laxla/gimli/server/impl/GimliInstance;)V
+	public synthetic fun convert (Ljava/lang/Object;)Lquest/laxla/gimli/Element;
+	public fun convert (Lquest/laxla/gimli/server/database/dao/Profile;)Lquest/laxla/gimli/Profile;
+	public final fun get (JZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun get (Lcom/eygraber/uri/Uri;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun get (Ljava/lang/String;Ljava/lang/String;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun get$default (Lquest/laxla/gimli/server/impl/ProfileProvider;JZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun get$default (Lquest/laxla/gimli/server/impl/ProfileProvider;Ljava/lang/String;Ljava/lang/String;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun getInstance ()Lquest/laxla/gimli/server/impl/GimliInstance;
+}
+
+public final class quest/laxla/gimli/server/impl/VoterProvider : quest/laxla/gimli/server/impl/LocalProvider {
+	public fun <init> (Lquest/laxla/gimli/server/impl/GimliInstance;)V
+	public synthetic fun convert (Ljava/lang/Object;)Lquest/laxla/gimli/Element;
+	public fun convert (Lquest/laxla/gimli/server/database/dao/Voter;)Lquest/laxla/gimli/Voter;
+	public fun get (Lcom/eygraber/uri/Uri;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getInstance ()Lquest/laxla/gimli/server/impl/GimliInstance;
+}
+

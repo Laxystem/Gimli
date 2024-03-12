@@ -13,6 +13,7 @@ public enum class Specification(
     public val baseUrl: String = "$context#"
 ) {
     ActivityPub(context = "https://www.w3.org/ns/activitystreams"),
+    Fep5a4f(context = "https://www.w3id.org/fep/54af"),
     ForgeFed(context = "https://forgefed.org/ns"),
     Gimli(context = "https://gimli.laxla.quest/ns"); // TODO: actually upload something there
 

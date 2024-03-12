@@ -11,11 +11,11 @@ package quest.laxla.gimli
 import kotlinx.datetime.Instant
 import quest.laxla.gimli.util.ImmutableList
 
-public interface Vote : Element.Federalized<Vote> { // TODO: add properties
+public interface Vote : Element<Vote> { // TODO: add properties
     /**
-     * The [Accessor] that has created this [Vote].
+     * The [Voter] that has created this [Vote].
      */
-    public val sponsor: Ref<Accessor>
+    public val sponsor: Ref<Voter>
 
     /**
      * The [Ability] this vote is intended to invoke.
@@ -25,7 +25,7 @@ public interface Vote : Element.Federalized<Vote> { // TODO: add properties
     /**
      * The responses to this vote, and if publicized, the responders themselves.
      */
-    public val responses: ImmutableList<Pair<Ref<Accessor>?, Response>>
+    public val responses: ImmutableList<Pair<Ref<Voter>?, Response>>
 
     public val plannedEndTime: Instant?
 
@@ -36,7 +36,7 @@ public interface Vote : Element.Federalized<Vote> { // TODO: add properties
      */
     public val actualEndTime: Instant?
 
-    public operator fun set(accessor: Accessor, response: Response)
+    public operator fun set(voter: Voter, response: Response)
 
     public enum class TimeoutResult {
         ForceSuccess, Evaluate, ForceFailure
@@ -47,7 +47,7 @@ public interface Vote : Element.Federalized<Vote> { // TODO: add properties
     }
 
     /**
-     * Describes how neutral responses interact with the [vote success percentage]][Authorizable.defaultVoteSuccessPercentage].
+     * Describes how neutral responses interact with the [vote success percentage]][Topic.defaultVoteSuccessPercentage].
      */
     public enum class NeutralResponseBehaviour {
         PassivelyFor, Uncounted, PassivelyAgainst;
@@ -58,13 +58,13 @@ public interface Vote : Element.Federalized<Vote> { // TODO: add properties
     }
 
     public companion object {
-        public val Vote.responders: Sequence<Ref<Accessor>> get() = responses.asSequence().mapNotNull { it.first }
+        public val Vote.responders: Sequence<Ref<Voter>> get() = responses.asSequence().mapNotNull { it.first }
         public val Vote.results: Sequence<Response> get() = responses.asSequence().map { it.second }
         public val Vote.isTimeLimited: Boolean get() = plannedEndTime != null
         public val Vote.isTimeUnlimited: Boolean get() = plannedEndTime == null
         public val Vote.isAutomaticallyEvaluating: Boolean
-            get() = if (isTimeLimited) ability.authorizable.isAutomaticallyEvaluatingTimeLimitedVotes
-            else ability.authorizable.isAutomaticallyEvaluatingTimeUnlimitedVotes
+            get() = if (isTimeLimited) ability.topic.isAutomaticallyEvaluatingTimeLimitedVotes
+            else ability.topic.isAutomaticallyEvaluatingTimeUnlimitedVotes
 
         /**
          * Counts the results of this vote,

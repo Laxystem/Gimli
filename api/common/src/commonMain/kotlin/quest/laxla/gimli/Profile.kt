@@ -10,6 +10,7 @@
 
 package quest.laxla.gimli
 
+import com.eygraber.uri.Uri
 import kotlinx.serialization.Serializable
 import quest.laxla.gimli.util.emptyString
 
@@ -18,18 +19,13 @@ import quest.laxla.gimli.util.emptyString
  * Something that can be the author of [Post]s.
  */
 @Specification.Compliance(Specification.ActivityPub, name = "Actor")
-public sealed interface Profile : Element.Federalized<Profile> {
-    @Specification.Compliance(Specification.Gimli, name = "accessor")
-    public val accessor: Accessor
+public interface Profile : Element<Profile> {
+    public val voter: Voter
 
-    @Specification.Compliance(Specification.Gimli, name = "authorizable")
-    public val authorizable: Authorizable
+    public val topic: Topic
 
     @Specification.Compliance(Specification.ActivityPub, name = "name")
     public val displayName: String
-
-    @Specification.Compliance(Specification.Gimli, name = "shortSummary")
-    public val title: String
 
     @Specification.Compliance(Specification.ActivityPub, name = "summary")
     public val about: String
@@ -39,20 +35,20 @@ public sealed interface Profile : Element.Federalized<Profile> {
 
     @Serializable
     public data class CreateBuilder(
-        val owner: Ref<Accessor>,
-        var displayName: String = emptyString(),
-        var title: String = emptyString(),
-        var about: String = emptyString()
+        val owner: Ref<Voter>,
+        val displayName: String = emptyString(),
+        val title: String = emptyString(),
+        val about: String = emptyString()
     ) : Element.Builder.Create<CreateBuilder> {
         override fun clone(): CreateBuilder = copy()
     }
 
     @Serializable
     public data class UpdateBuilder(
-        override val primaryFederalIdentifier: String,
-        var displayName: String? = null,
-        var title: String? = null,
-        var about: String? = null
+        override val primaryFederalIdentifier: Uri,
+        val displayName: String? = null,
+        val title: String? = null,
+        val about: String? = null
     ): Element.Builder.Update<UpdateBuilder> {
         override fun clone(): UpdateBuilder = copy()
     }

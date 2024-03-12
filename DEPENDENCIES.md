@@ -63,15 +63,16 @@ For a list of protocols implemented by Project: Gimli, see [FEDERATION.md](FEDER
   an unofficial Kotlin/Multiplatform IO library, to be replaced by the official KotlinX IO.
 * **[OpenMLS](https://openmls.tech)** (MIT),
   an implementation of the Messaging Layer Security protocol written in Rust.
-* **[PGJDBC-NG](https://impossibl.github.io/pgjdbc-ng/)** (`postgres`; Custom),
-  Java Database Connectivity API driver for PostgreSQL.
-  Will be replaced with the official PostgreSQL driver.
+* **[PGJDBC](https://impossibl.github.io/pgjdbc-ng/)** (`postgres`; BSD 2-Clause),
+  The official Java Database Connectivity API driver for PostgreSQL.
 * **[PostgreSQL](https://postgresql.org)** (PostgreSQL License),
   an open source SQL dialect.
 * **[SLF4J](https://slf4j.org)** (MIT),
   a logging API for the JVM, unifying the various logging frameworks it has. Used by Kotlin Logging on the JVM.
 * **[Titanium](https://github.com/filip26/titanium-json-ld)** (`titanium`; Apache 2.0),
   an implementation of JsonLD written in Java.
+* **[Uri KMP](https://github.com/eygraber/uri-kmp)** (`uri`; Apache 2.0)
+  Lightweight URI parser for Kotlin/Multiplatform.
 * **[WebAssembly](https://webassembly.org)** (Apache 2.0),
   a modular virtual machine runnable both standalone and within the browser.
   Gimli's web client compiles to Wasm, and official clients use Wasm libraries via Extism.

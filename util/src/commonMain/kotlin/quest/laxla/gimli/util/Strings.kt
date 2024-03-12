@@ -80,15 +80,15 @@ public inline fun <T> T?.ifNotBlankNorNull(block: (T) -> Unit) where T : CharSeq
 }
 
 /**
- * Executes [block] if this char sequence is `null` or empty or only consists of whitespace character.
+ * Returns [block] if this char sequence is `null`, [empty][isEmpty] or [blank][isBlank].
  */
 @OptIn(ExperimentalContracts::class)
-public inline fun <T> T.ifBlankOrNull(block: (T) -> Unit) where T : CharSequence? {
+public inline fun <T> T.ifBlankOrNull(block: (T) -> T): T where T : CharSequence? {
     contract {
         callsInPlace(block, InvocationKind.AT_MOST_ONCE)
     }
 
-    if (isNullOrBlank()) block(this)
+    return if (isNullOrBlank()) block(this) else this
 }
 
 /**
@@ -309,14 +309,4 @@ public fun String.removeSurrounding(prefixRegex: Regex, suffixRegex: Regex): Str
 
     return if (prefix == null || suffix == null || prefix.range.first != 0 || prefix.range.last != lastIndex) this
     else substring(prefix.value.length..<length - suffix.value.length)
-}
-
-@OptIn(ExperimentalContracts::class)
-public inline fun String?.ifBlankEmptyElse(block: (String) -> String): String {
-    contract {
-        callsInPlace(block, InvocationKind.AT_MOST_ONCE)
-    }
-
-    return if (isNullOrBlank()) emptyString()
-    else block(this)
 }

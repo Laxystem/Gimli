@@ -8,29 +8,25 @@
 
 package quest.laxla.gimli.server.database.dao
 
-import org.jetbrains.exposed.dao.LongEntity
 import org.jetbrains.exposed.dao.LongEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
-import org.jetbrains.exposed.dao.id.LongIdTable
 import org.jetbrains.exposed.sql.ReferenceOption
+import quest.laxla.gimli.server.database.FederalEntity
 import quest.laxla.gimli.server.database.creationTime
 import quest.laxla.gimli.server.database.referencing
 
-class Profile(id: EntityID<Long>) : LongEntity(id) {
+class Profile(id: EntityID<Long>) : FederalEntity(id, Table) {
     val about by Table.about
-    val accessor by Table.accessor referencing Accessor
-    val authorizable by Table.accessor referencing Authorizable
-    val creationTime by Table.creationTime
     val displayName by Table.displayName
-    val title by Table.title
-
+    val voter by Table.voter referencing Voter
+    val topic by Table.topic referencing Topic
+    val creationTime by Table.creationTime
 
     companion object : LongEntityClass<Profile>(Table)
-    object Table : LongIdTable() {
-        val title = text(name = "title")
+    object Table : FederalEntity.Table() {
         val about = text(name = "about")
-        val accessor = reference(name = "accessor_id", Accessor.Table, ReferenceOption.RESTRICT).uniqueIndex()
-        val authorizable = reference(name = "authorizable_id", Authorizable.Table, ReferenceOption.RESTRICT).uniqueIndex()
+        val voter = reference(name = "voter_id", Voter.Table, ReferenceOption.RESTRICT).uniqueIndex()
+        val topic = reference(name = "topic_id", Topic.Table, ReferenceOption.RESTRICT).uniqueIndex()
         val creationTime = creationTime()
         val displayName = varchar(name = "display_name", length = 32)
     }

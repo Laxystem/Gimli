@@ -17,12 +17,12 @@ import quest.laxla.gimli.server.database.*
 
 
 class Account(id: EntityID<Long>) : LongEntity(id) {
-    val accessor by Table.accessor referencing Accessor
+    val voter by Table.voter referencing Voter
     val creationTime by Table.creationTime
 
     companion object : LongEntityClass<Account>(Table)
     object Table : LongIdTable() {
-        val accessor = reference(name = "accessor_id", Accessor.Table, ReferenceOption.RESTRICT)
+        val voter = reference(name = "voter_id", Voter.Table, ReferenceOption.RESTRICT).uniqueIndex()
         val creationTime = creationTime()
     }
 }

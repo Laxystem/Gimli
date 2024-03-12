@@ -8,6 +8,7 @@
 
 package quest.laxla.gimli
 
+import com.eygraber.uri.Uri
 import quest.laxla.gimli.Ref.*
 import kotlin.jvm.JvmInline
 
@@ -17,11 +18,11 @@ import kotlin.jvm.JvmInline
 public sealed interface Ref<T> : Identified where T : Element<T> { // TODO: serialize
     @JvmInline
     public value class Direct<T>(public val value: T) : Ref<T> where T : Element<T> {
-        override val primaryFederalIdentifier: String get() = value.primaryFederalIdentifier
+        override val primaryFederalIdentifier: Uri get() = value.primaryFederalIdentifier
     }
 
     @JvmInline
-    public value class Federal<T>(override val primaryFederalIdentifier: String) :
+    public value class Federal<T>(override val primaryFederalIdentifier: Uri) :
         Ref<T> where T : Element.Federalized<T>
 
     public companion object {

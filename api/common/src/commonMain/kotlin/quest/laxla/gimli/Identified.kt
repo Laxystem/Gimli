@@ -8,6 +8,8 @@
 
 package quest.laxla.gimli
 
+import com.eygraber.uri.Uri
+
 public interface Identified {
-    public val primaryFederalIdentifier: String
+    public val primaryFederalIdentifier: Uri
 }

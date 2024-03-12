@@ -10,6 +10,7 @@ package quest.laxla.gimli
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.Transient
+import quest.laxla.gimli.util.Uri
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -45,7 +46,7 @@ public interface Element<T> : Identified where T : Element<T> {
         /**
          * Retrieve an element by its [federalIdentifier].
          */
-        public suspend fun get(federalIdentifier: String, invalidateCache: Boolean = false): T
+        public suspend fun get(federalIdentifier: Uri, invalidateCache: Boolean = false): T
 
         public companion object {
             public suspend fun <T> Provider<T>.get(

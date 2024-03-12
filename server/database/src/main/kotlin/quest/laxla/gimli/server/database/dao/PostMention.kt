@@ -15,20 +15,17 @@ import org.jetbrains.exposed.dao.id.LongIdTable
 import org.jetbrains.exposed.sql.ReferenceOption
 import quest.laxla.gimli.server.database.*
 
-class Username(id: EntityID<Long>) : LongEntity(id) {
-    val profile by Table.profile referencingNullable Profile
-    val instance by Table.instance
-    val value by Table.value
+class PostMention(id: EntityID<Long>) : LongEntity(id) {
+    val mentionedProfile by Table.mentionedProfile referencing Profile
+    val post by Table.post referencing Post
 
-    companion object : LongEntityClass<Username>(Table)
-
+    companion object : LongEntityClass<PostMention>(Table)
     object Table : LongIdTable() {
-        val profile = nullableReference(name = "profile_id", Profile.Table, onDelete = ReferenceOption.SET_NULL)
-        val instance = domain(name = "instance").nullable()
-        val value = citext(name = "username")
+        val mentionedProfile = reference(name = "mentioned_profile_id", Profile.Table, onDelete = ReferenceOption.CASCADE)
+        val post = reference(name = "post_id", Post.Table, onDelete = ReferenceOption.CASCADE)
 
         init {
-            uniqueIndex(instance, value) // TODO: NULLS NOT DISTINCT
+            uniqueIndex(mentionedProfile, post)
         }
     }
 }

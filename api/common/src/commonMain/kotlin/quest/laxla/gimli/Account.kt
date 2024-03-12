@@ -8,6 +8,7 @@
 
 package quest.laxla.gimli
 
+import com.eygraber.uri.Uri
 import kotlinx.serialization.Serializable
 import quest.laxla.gimli.util.ImmutableList
 import quest.laxla.gimli.util.Optional
@@ -15,12 +16,12 @@ import quest.laxla.gimli.util.Optional
 @ClientToServerOnly
 public interface Account : Element<Account> {
     /**
-     * This [Account]'s [Accessor].
+     * This [Account]'s [Voter].
      *
      * If used directly, other accessors authorized to the same [abilities][Ability] will be able
      * to view this account's [primary][EmailAddress.isPrimary] [EmailAddress].
      */
-    public val accessor: Accessor
+    public val accessor: Voter
 
     /**
      * All known [EmailAddress]es belonging to this [Account].
@@ -95,10 +96,10 @@ public interface Account : Element<Account> {
             /**
              * The email address to be updated, using the `mailto` protocol.
              */
-            override val primaryFederalIdentifier: String,
-            var isPublic: Optional<Boolean> = Optional.Empty,
-            var isDiscoverable: Optional<Boolean> = Optional.Empty,
-            var isPrimary: Optional<Boolean> = Optional.Empty
+            override val primaryFederalIdentifier: Uri,
+            val isPublic: Optional<Boolean> = Optional.Empty,
+            val isDiscoverable: Optional<Boolean> = Optional.Empty,
+            val isPrimary: Optional<Boolean> = Optional.Empty
         ) : Element.Builder.Update<UpdateBuilder> {
             override fun clone(): UpdateBuilder = copy()
         }

@@ -30,6 +30,6 @@ kotlin {
     }
 
     sourceSets.commonMain.dependencies {
-        api(gimliModule(path = ":util"))
+        api(gimliModule(":util"))
     }
 }

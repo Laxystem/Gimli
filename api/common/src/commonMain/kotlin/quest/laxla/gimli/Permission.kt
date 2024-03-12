@@ -31,12 +31,12 @@ public object Permission {
 
     /**
      * Bypass [Vote]s targeting the authorizable,
-     * forcing them to succeed if [enabled][Authorizable.isAllowingBypasses].
+     * forcing them to succeed if [enabled][Topic.isAllowingBypasses].
      */
     public val Bypass: String by Permission
 
     /**
-     * Veto [Vote]s targeting the authorizable to fail if [enabled][Authorizable.isAllowingVetoes].
+     * Veto [Vote]s targeting the authorizable to fail if [enabled][Topic.isAllowingVetoes].
      */
     public val Veto: String by Permission
 

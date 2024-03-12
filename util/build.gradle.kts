@@ -12,8 +12,10 @@ val coroutines: String by properties
 val datetime: String by properties
 val jdk: String by properties
 val klogging: String by properties
+val ktor: String by properties
 val logback: String by properties
 val serialization: String by properties
+val uri: String by properties
 
 kotlin {
     applyDefaultHierarchyTemplate()
@@ -37,6 +39,7 @@ kotlin {
     }
 
     sourceSets.commonMain.dependencies {
+        api("com.eygraber:uri-kmp:$uri")
         api("io.github.oshai:kotlin-logging:$klogging")
         api("org.jetbrains.kotlinx:kotlinx-collections-immutable:$collections")
         api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines")

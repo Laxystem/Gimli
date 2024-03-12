@@ -1,6 +1,5 @@
 public final class quest/laxla/gimli/server/networking/AppKt {
-	public static final fun main ()V
-	public static synthetic fun main ([Ljava/lang/String;)V
+	public static final fun main ([Ljava/lang/String;)V
 }
 
 public final class quest/laxla/gimli/server/networking/webfinger/JrdLink {
