@@ -1,6 +1,6 @@
 # Contributing to Project: Gimli
 
-Project: Gimli is available on [Codeberg](https://Codeberg.org/Laxystem/Gimli),
+Project: Gimli is available on [Codeberg](https://Codeberg.org/Moria/Gimli),
 and mirrored on [GitHub](https://GitHub.com/Laxystem/Gimli).
 
 ## Always Ask, Not to Ask
