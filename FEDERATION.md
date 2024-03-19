@@ -13,10 +13,10 @@ Fediverse-related protocols and standards are **bold**.
 * **[ActivityPub](https://activitypub.rocks)** (Server-to-Server and Client-to-Server)
 * [GitHub Flavoured Markdown](https://github.github.com/gfm)
 * [Messaging Layer Security](https://messaginglayersecurity.rocks)
-* [OAuth](https://oauth.net)
+* [OAuth 2.0](https://oauth.net)
 
 ## Supported Fediverse Enhancement Proposals
-* [FEP-67ff: FEDERATION.md](https://codeberg.org/fediverse/fep/src/branch/main/fep/67ff/fep-67ff.md)
+* [FEP-67ff: FEDERATION.md](https://w3id.org/fep/67ff)
 
 
 ## Where's the "*extremely* long" `FEDARATION.md` file?

@@ -6,11 +6,11 @@ when:
 
 steps:
   - name: build
-    image: gradle:8.6-jdk17
+    image: gradle:8.6-jdk21
     commands:
       - ./gradlew build
   - name: release
-    image: gradle:8.6-jdk17
+    image: gradle:8.6-jdk21
     when:
       - event: push
         branch: ${CI_REPO_DEFAULT_BRANCH}

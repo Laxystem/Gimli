@@ -1,20 +1,37 @@
 rootProject.name = "Gimli"
 
-"util"()
-"api" {
-    "common"()
-    "client"()
-    "server"()
+"util" { // Utility functions for other libraries, keys are described in DEPENDENCIES.md
+    "coroutines"()
+    "exposed"()
+    "uri"()
 }
-"ld"()
-"server" {
-    "database"()
+
+"core" { // Extensions API
     "impl"()
-    "networking"()
 }
+
+"networking" { // Ktor
+    "server"()
+    "client"()
+
+    "routing" {
+        "server"()
+        "client"()
+    }
+}
+
+"database"() // JetBrains Exposed Extensions
+
+"social" { // Gimli Social Extension
+    "database"()
+    "webfinger"()
+}
+
+"ld"() // TODO
 
 pluginManagement {
     val abi: String by settings
+    val atomicfu: String by settings
     val dokka: String by settings
     val kotlin: String by settings
     val kover: String by settings

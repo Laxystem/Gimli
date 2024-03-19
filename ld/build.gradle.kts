@@ -3,6 +3,8 @@ plugins {
     kotlin("plugin.serialization")
 }
 
+repositories.mavenCentral()
+
 val collections: String by properties
 val datetime: String by properties
 val jakarta: String by properties

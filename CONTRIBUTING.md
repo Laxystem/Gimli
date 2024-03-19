@@ -107,9 +107,13 @@ Feel free to squash/rebase locally, as long as it only affects your own commits.
    ```shell
    ./gradlew build
    ```
-5. Update or create documentation (via [KDoc](https://kotlinlang.org/docs/kotlin-doc.html)).
-6. If you update, add or remove dependencies, update [`DEPENDENCIES.md`](DEPENDENCIES.md).
-7. If you modify federation behavior, update [`FEDERATION.md`](FEDERATION.md).
+5. Organize the repository via:
+   ```shell
+   ./gradlew organize
+   ```
+6. Update or create documentation (via [KDoc](https://kotlinlang.org/docs/kotlin-doc.html)).
+7. If you update, add or remove dependencies, update [`DEPENDENCIES.md`](DEPENDENCIES.md).
+8. If you modify federation behavior, update [`FEDERATION.md`](FEDERATION.md).
 
 ## Out of Scope
 

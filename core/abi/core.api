@@ -1,0 +1,81 @@
+public abstract interface class quest/laxla/gimli/Extension {
+	public fun afterDependentLoad (Lquest/laxla/gimli/Extension;ZLquest/laxla/gimli/Instance$MutationScope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun afterDependentLoad$suspendImpl (Lquest/laxla/gimli/Extension;Lquest/laxla/gimli/Extension;ZLquest/laxla/gimli/Instance$MutationScope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun afterDependentUnload (Lquest/laxla/gimli/Extension;ZLquest/laxla/gimli/Instance$MutationScope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun afterDependentUnload$suspendImpl (Lquest/laxla/gimli/Extension;Lquest/laxla/gimli/Extension;ZLquest/laxla/gimli/Instance$MutationScope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun afterLoad (ZLquest/laxla/gimli/Instance$MutationScope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun afterLoad$suspendImpl (Lquest/laxla/gimli/Extension;ZLquest/laxla/gimli/Instance$MutationScope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun beforeDependentLoad (Lquest/laxla/gimli/Extension;ZLquest/laxla/gimli/Instance$Scope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun beforeDependentLoad$suspendImpl (Lquest/laxla/gimli/Extension;Lquest/laxla/gimli/Extension;ZLquest/laxla/gimli/Instance$Scope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun beforeDependentUnload (Lquest/laxla/gimli/Extension;ZLquest/laxla/gimli/Instance$Scope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun beforeDependentUnload$suspendImpl (Lquest/laxla/gimli/Extension;Lquest/laxla/gimli/Extension;ZLquest/laxla/gimli/Instance$Scope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun beforeLoad (ZLquest/laxla/gimli/Instance;)V
+	public fun beforeShutdown (Lquest/laxla/gimli/Instance$Scope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun beforeShutdown$suspendImpl (Lquest/laxla/gimli/Extension;Lquest/laxla/gimli/Instance$Scope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun beforeUnload (ZLquest/laxla/gimli/Instance$Scope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun beforeUnload$suspendImpl (Lquest/laxla/gimli/Extension;ZLquest/laxla/gimli/Instance$Scope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getNamespace ()Ljava/lang/String;
+	public fun onLoad (ZLquest/laxla/gimli/Instance$Scope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun onLoad$suspendImpl (Lquest/laxla/gimli/Extension;ZLquest/laxla/gimli/Instance$Scope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun onUnload (ZLquest/laxla/gimli/Instance$Scope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun onUnload$suspendImpl (Lquest/laxla/gimli/Extension;ZLquest/laxla/gimli/Instance$Scope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class quest/laxla/gimli/ExtensionNotLoadedException : java/util/NoSuchElementException {
+	public fun <init> (Ljava/lang/String;)V
+}
+
+public class quest/laxla/gimli/IncompatibleExtensionSetException : java/lang/Exception {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public abstract interface class quest/laxla/gimli/Instance {
+	public static final field Companion Lquest/laxla/gimli/Instance$Companion;
+	public abstract fun asFlow (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun contains (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun contains (Lquest/laxla/gimli/Extension;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun get (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getOrThrow (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getStatus ()Lquest/laxla/gimli/Instance$Status;
+	public abstract fun shutdown (ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun shutdown$default (Lquest/laxla/gimli/Instance;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public abstract interface class quest/laxla/gimli/Instance$AbstractScope {
+	public synthetic fun getExtension ()Lquest/laxla/gimli/Extension;
+	public abstract fun getInstance ()Lquest/laxla/gimli/Instance;
+	public abstract fun isOf (Ljava/lang/String;)Z
+	public abstract fun isOf (Lquest/laxla/gimli/Extension;)Z
+}
+
+public final class quest/laxla/gimli/Instance$Companion {
+}
+
+public abstract interface class quest/laxla/gimli/Instance$MutationScope : quest/laxla/gimli/Instance$AbstractScope {
+}
+
+public abstract interface class quest/laxla/gimli/Instance$Scope : quest/laxla/gimli/Instance$AbstractScope {
+}
+
+public final class quest/laxla/gimli/Instance$Status : java/lang/Enum {
+	public static final field Mutating Lquest/laxla/gimli/Instance$Status;
+	public static final field Offline Lquest/laxla/gimli/Instance$Status;
+	public static final field Running Lquest/laxla/gimli/Instance$Status;
+	public final fun getAcceptsMutations ()Z
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lquest/laxla/gimli/Instance$Status;
+	public static fun values ()[Lquest/laxla/gimli/Instance$Status;
+}
+
+public abstract interface annotation class quest/laxla/gimli/LockingApi : java/lang/annotation/Annotation {
+	public abstract fun replaceWith ()Lkotlin/ReplaceWith;
+}
+
+public class quest/laxla/gimli/UnsupportedDynamicallyException : java/lang/UnsupportedOperationException {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+

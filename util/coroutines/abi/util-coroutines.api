@@ -1,0 +1,53 @@
+public final class quest/laxla/gimli/util/coroutines/AsyncKt {
+	public static final fun asyncVoidingCancellation (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Deferred;
+	public static synthetic fun asyncVoidingCancellation$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Deferred;
+}
+
+public final class quest/laxla/gimli/util/coroutines/CatchingFlowKt {
+	public static final fun asFlowCatching (Lkotlin/jvm/functions/Function0;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun asFlowCatching (Lkotlin/jvm/functions/Function1;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun catching (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun catchingFlowOf (Ljava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun catchingFlowOf (Ljava/lang/Throwable;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun catchingFlowOf ([Ljava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun catchingFlowOf ([Ljava/lang/Throwable;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun emit (Lkotlinx/coroutines/flow/FlowCollector;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun emit (Lkotlinx/coroutines/flow/FlowCollector;Ljava/lang/Throwable;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun filterFailures (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun flowCatching (Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun handleFailures (Lkotlinx/coroutines/flow/Flow;Lio/github/oshai/kotlinlogging/KLogger;Lio/github/oshai/kotlinlogging/Level;)Lkotlinx/coroutines/flow/Flow;
+	public static synthetic fun handleFailures$default (Lkotlinx/coroutines/flow/Flow;Lio/github/oshai/kotlinlogging/KLogger;Lio/github/oshai/kotlinlogging/Level;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun iterableOfProvidersToFlowCatching() (Ljava/lang/Iterable;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun iterableOfSuspendingProvidersToFlowCatching() (Ljava/lang/Iterable;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun iterableToFlowCatching (Ljava/lang/Iterable;)Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class quest/laxla/gimli/util/coroutines/ContextKt {
+	public static final fun plus (Lkotlin/coroutines/CoroutineContext;Lkotlin/coroutines/CoroutineContext;)Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class quest/laxla/gimli/util/coroutines/ReentrantMutexContextElement : kotlin/coroutines/CoroutineContext$Element {
+	public fun <init> (Lquest/laxla/gimli/util/coroutines/ReentrantMutexContextKey;)V
+	public fun fold (Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
+	public fun get (Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext$Element;
+	public synthetic fun getKey ()Lkotlin/coroutines/CoroutineContext$Key;
+	public fun getKey ()Lquest/laxla/gimli/util/coroutines/ReentrantMutexContextKey;
+	public fun minusKey (Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext;
+	public fun plus (Lkotlin/coroutines/CoroutineContext;)Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class quest/laxla/gimli/util/coroutines/ReentrantMutexContextKey : kotlin/coroutines/CoroutineContext$Key {
+	public fun <init> (Lkotlinx/coroutines/sync/Mutex;)V
+	public final fun component1 ()Lkotlinx/coroutines/sync/Mutex;
+	public final fun copy (Lkotlinx/coroutines/sync/Mutex;)Lquest/laxla/gimli/util/coroutines/ReentrantMutexContextKey;
+	public static synthetic fun copy$default (Lquest/laxla/gimli/util/coroutines/ReentrantMutexContextKey;Lkotlinx/coroutines/sync/Mutex;ILjava/lang/Object;)Lquest/laxla/gimli/util/coroutines/ReentrantMutexContextKey;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMutex ()Lkotlinx/coroutines/sync/Mutex;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class quest/laxla/gimli/util/coroutines/ReentrantMutexKt {
+	public static final fun withReentrantLock (Lkotlinx/coroutines/sync/Mutex;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+

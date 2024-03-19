@@ -6,6 +6,6 @@ plugins {
 val ktor: String by project
 
 dependencies {
-    api(gimliModule(":api:server"))
+    api(gimliModule(":social:server"))
     implementation(gimliModule(":server:database"))
 }
