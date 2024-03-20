@@ -111,6 +111,7 @@ Feel free to squash/rebase locally, as long as it only affects your own commits.
    ```shell
    ./gradlew organize
    ```
+   This will update modules' `README.md`, and will add a license notice at the top of the file.
 6. Update or create documentation (via [KDoc](https://kotlinlang.org/docs/kotlin-doc.html)).
 7. If you update, add or remove dependencies, update [`DEPENDENCIES.md`](DEPENDENCIES.md).
 8. If you modify federation behavior, update [`FEDERATION.md`](FEDERATION.md).
