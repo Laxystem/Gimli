@@ -95,26 +95,31 @@ Feel free to squash/rebase locally, as long as it only affects your own commits.
 
 ### Before Committing
 
-1. Make sure all tests succeed.
-2. Update or create tests for functionality you change.
-3. If you modify public API,
+1. If the version specified in [`gradle.properties`](gradle.properties) is already released, increase it.
+2. Make sure all tests succeed.
+3. Update or create tests for functionality you change.
+4. If you modify public API,
     *
         1. [Update the ABI](#bytecode-backwards-compatibility).
         2. Make sure the changes match your expectations.
     * Otherwise, [check for breaking changes](#bytecode-backwards-compatibility).
-
-4. Make sure the repo builds successfully, via:
-   ```shell
-   ./gradlew build
-   ```
 5. Organize the repository via:
    ```shell
    ./gradlew organize
    ```
+6. Make sure the repo builds successfully, via:
+   ```shell
+   ./gradlew build
+   ```
    This will update modules' `README.md`, and will add a license notice at the top of the file.
-6. Update or create documentation (via [KDoc](https://kotlinlang.org/docs/kotlin-doc.html)).
-7. If you update, add or remove dependencies, update [`DEPENDENCIES.md`](DEPENDENCIES.md).
-8. If you modify federation behavior, update [`FEDERATION.md`](FEDERATION.md).
+7. Update or create documentation (via [KDoc](https://kotlinlang.org/docs/kotlin-doc.html)).
+8. If you update, add or remove dependencies,
+   1. Update [`DEPENDENCIES.md`](DEPENDENCIES.md).
+   2. Run:
+      ```shell
+      ./gradlew kotlinUpgradeYarnLock
+      ```
+9. If you modify federation behavior, update [`FEDERATION.md`](FEDERATION.md).
 
 ## Out of Scope
 
