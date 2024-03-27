@@ -2,9 +2,13 @@
 
 *Federated End-to-End-Encrypted Guild-Based Messaging App & Blogging Platform*
 
-For a list of dependencies, see [DEPENDENCIES.md](DEPENDENCIES.md).
-
-For a list of supported protocols, see [FEDERATION.md](FEDERATION.md).
+* For the license, see [LICENSE.md](LICENSE.md).
+* For a list of dependencies, see [DEPENDENCIES.md](DEPENDENCIES.md).
+* For a list of supported specifications, see [FEDERATION.md](FEDERATION.md).
+* For an explanation about the functionality of a module, see its `README.md`.
+* If you want to contribute, see [CONTRIBUTING.md](CONTRIBUTING.md).
+* For updates, follow [@laxla@tech.lgbt](https://tech.lgbt/@laxla).
+* To discuss, check out the [Matrix room](https://matrix.to/#/!bAyQFEhYfseETrFhTR:matrix.org?via=matrix.org).
 
 ## Design Language
 
