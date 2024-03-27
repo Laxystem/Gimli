@@ -1,6 +1,6 @@
 # Project: Gimli
 
-*Federated End-to-End-Encrypted Guild-Based Messaging App & Blogging Platform*
+<p style="text-align: center"><i>Federated End-to-End-Encrypted Guild-Based Messaging App & Blogging Platform</i></p>
 
 * For the license, see [LICENSE.md](LICENSE.md).
 * For a list of dependencies, see [DEPENDENCIES.md](DEPENDENCIES.md).
@@ -10,11 +10,17 @@
 * For updates, follow [@laxla@tech.lgbt](https://tech.lgbt/@laxla).
 * To discuss, check out the [Matrix room](https://matrix.to/#/!bAyQFEhYfseETrFhTR:matrix.org?via=matrix.org).
 
-## Design Language
+## Goals
+* To prove platforms designed for people are better than those designed for profit.
+* To provide a proof-of-concept of [FEP-5a4f: Federated Democracy](https://w3id.org/fep/5a4f).
 
-Project: Gimli uses [Material 3](https://m3.material.io).
+## Official Client
 
-### Palette
+### Design Language
+
+The official Project: Gimli client uses [Material 3](https://m3.material.io).
+
+#### Palette
 
 The primary color is:
 
