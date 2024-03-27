@@ -1,18 +1,37 @@
 rootProject.name = "Gimli"
 
-include(
-    "util",
-    "api:common",
-    "api:client",
-    "api:server",
-    "ld",
-    "server:database",
-    "server:impl",
-    "server:networking",
-)
+"util" { // Utility functions for other libraries, keys are described in DEPENDENCIES.md
+    "coroutines"()
+    "exposed"()
+    "uri"()
+}
+
+"core" { // Extensions API
+    "impl"()
+}
+
+"networking" { // Ktor
+    "server"()
+    "client"()
+
+    "routing" {
+        "server"()
+        "client"()
+    }
+}
+
+"database"() // JetBrains Exposed Extensions
+
+"social" { // Gimli Social Extension
+    "database"()
+    "webfinger"()
+}
+
+"ld"() // TODO
 
 pluginManagement {
     val abi: String by settings
+    val atomicfu: String by settings
     val dokka: String by settings
     val kotlin: String by settings
     val kover: String by settings
@@ -33,3 +52,21 @@ pluginManagement {
         kotlin("plugin.serialization") version kotlin apply false
     }
 }
+
+// region Boring fancy DSL stuff
+data class Module(val name: String, val path: String) {
+    inline operator fun String.invoke(submodules: Module.() -> Unit = {}) = this(parentModule = this@Module, submodules)
+}
+
+inline operator fun String.invoke(parentModule: Module? = null, submodules: Module.() -> Unit = {}) {
+    val fullPath = parentModule?.path.orEmpty() + ':' + this
+
+    include(fullPath)
+
+    val project = project(fullPath)
+    val fullName = parentModule?.let { "${it.name}-" }.orEmpty() + this
+
+    project.name = fullName
+    Module(fullName, fullPath).submodules()
+}
+// endregion

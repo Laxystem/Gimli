@@ -2,28 +2,19 @@ public final class quest/laxla/gimli/util/BooleansKt {
 	public static final fun implies (ZZ)Z
 }
 
-public final class quest/laxla/gimli/util/CatchingFlowKt {
-	public static final fun asFlowCatching (Lkotlin/jvm/functions/Function0;)Lkotlinx/coroutines/flow/Flow;
-	public static final fun asFlowCatching (Lkotlin/jvm/functions/Function1;)Lkotlinx/coroutines/flow/Flow;
-	public static final fun catching (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/flow/Flow;
-	public static final fun catchingFlowOf (Ljava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
-	public static final fun catchingFlowOf (Ljava/lang/Throwable;)Lkotlinx/coroutines/flow/Flow;
-	public static final fun catchingFlowOf ([Ljava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
-	public static final fun catchingFlowOf ([Ljava/lang/Throwable;)Lkotlinx/coroutines/flow/Flow;
-	public static final fun emit (Lkotlinx/coroutines/flow/FlowCollector;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun emit (Lkotlinx/coroutines/flow/FlowCollector;Ljava/lang/Throwable;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun filterFailures (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/flow/Flow;
-	public static final fun flowCatching (Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/flow/Flow;
-	public static final fun handleFailures (Lkotlinx/coroutines/flow/Flow;Lio/github/oshai/kotlinlogging/KLogger;Lio/github/oshai/kotlinlogging/Level;)Lkotlinx/coroutines/flow/Flow;
-	public static synthetic fun handleFailures$default (Lkotlinx/coroutines/flow/Flow;Lio/github/oshai/kotlinlogging/KLogger;Lio/github/oshai/kotlinlogging/Level;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
-	public static final fun iterableOfProvidersToFlowCatching() (Ljava/lang/Iterable;)Lkotlinx/coroutines/flow/Flow;
-	public static final fun iterableOfSuspendingProvidersToFlowCatching() (Ljava/lang/Iterable;)Lkotlinx/coroutines/flow/Flow;
-	public static final fun iterableToFlowCatching (Ljava/lang/Iterable;)Lkotlinx/coroutines/flow/Flow;
+public abstract interface class quest/laxla/gimli/util/DeinitializableLazy {
+	public abstract fun deinitialize ()V
+	public abstract fun getValue ()Ljava/lang/Object;
+	public abstract fun isInitialized ()Z
 }
 
-public final class quest/laxla/gimli/util/DomainsKt {
-	public static final fun extractDomain (Ljava/lang/String;)Ljava/lang/String;
-	public static final fun isOfDomain (Ljava/lang/String;Ljava/lang/String;)Z
+public final class quest/laxla/gimli/util/DeinitializableLazyKt {
+	public static final fun getValue (Lquest/laxla/gimli/util/DeinitializableLazy;Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+}
+
+public final class quest/laxla/gimli/util/DeinitializableLazy_jvmKt {
+	public static final fun deinitializableLazy (Lkotlin/jvm/functions/Function0;)Lquest/laxla/gimli/util/DeinitializableLazy;
+	public static final fun deinitializableLazy (ZLkotlin/jvm/functions/Function0;)Lquest/laxla/gimli/util/DeinitializableLazy;
 }
 
 public final class quest/laxla/gimli/util/EnvKt {
@@ -71,6 +62,10 @@ public final class quest/laxla/gimli/util/MaybeKt {
 	public static final fun not (Ljava/lang/Boolean;)Ljava/lang/Boolean;
 	public static final fun or (Ljava/lang/Boolean;Ljava/lang/Boolean;)Ljava/lang/Boolean;
 	public static final fun xor (Ljava/lang/Boolean;Ljava/lang/Boolean;)Ljava/lang/Boolean;
+}
+
+public abstract interface annotation class quest/laxla/gimli/util/OnlyCallableBy : java/lang/annotation/Annotation {
+	public abstract fun klass ()Ljava/lang/Class;
 }
 
 public abstract interface class quest/laxla/gimli/util/Optional {
@@ -151,10 +146,6 @@ public final class quest/laxla/gimli/util/ResultKt {
 	public static final fun not (Ljava/lang/Throwable;)Ljava/lang/Object;
 }
 
-public final class quest/laxla/gimli/util/SerializationKt {
-	public static final fun getGimliJson ()Lkotlinx/serialization/json/Json;
-}
-
 public final class quest/laxla/gimli/util/StringsKt {
 	public static final field DotDotDot Ljava/lang/String;
 	public static final field Ellipsis C
@@ -169,8 +160,7 @@ public final class quest/laxla/gimli/util/StringsKt {
 	public static synthetic fun findAll$default (Ljava/lang/CharSequence;Lkotlin/text/Regex;IILjava/lang/Object;)Lkotlin/sequences/Sequence;
 	public static final fun findLast (Ljava/lang/CharSequence;Lkotlin/text/Regex;I)Lkotlin/text/MatchResult;
 	public static synthetic fun findLast$default (Ljava/lang/CharSequence;Lkotlin/text/Regex;IILjava/lang/Object;)Lkotlin/text/MatchResult;
-	public static final fun ifBlankEmptyElse (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Ljava/lang/String;
-	public static final fun ifBlankOrNull (Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)V
+	public static final fun ifBlankOrNull (Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)Ljava/lang/CharSequence;
 	public static final fun ifNotBlankNorNull (Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)V
 	public static final fun isNotNullNorBlank (Ljava/lang/CharSequence;)Z
 	public static final fun removePrefix (Ljava/lang/CharSequence;Lkotlin/text/Regex;)Ljava/lang/CharSequence;

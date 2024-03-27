@@ -6,11 +6,13 @@ Dependencies are listed the following way:
 
 Dependency versions can be found in [gradle.properties](gradle.properties),
 listed under their `identifier`.
+Additionally, library-specific utilities can be found as a subproject of the `:util` project,
+named the as that library's `identifier`.
 
 This list isn't complete.
 If you spot any mistakes or dependencies we haven't mentioned, feel free to PR.
 Note this list contains behaviour that is *planned*, but not yet implemented.
-Note we try including note-worthy dependencies only, that is, software either used directly by Gimli,
+Note we try including noteworthy dependencies only, that is, software either used directly by Gimli,
 or essential to the functionality of a dependency.
 
 For a list of protocols implemented by Project: Gimli, see [FEDERATION.md](FEDERATION.md).
@@ -35,17 +37,18 @@ For a list of protocols implemented by Project: Gimli, see [FEDERATION.md](FEDER
 * **[Jakarta](https://jakarta.ee)** (`jakarta`; EPL 2.0),
   formerly known as JavaX and Java Enterprise, an extension to Java's standard library.
 * **Java Virtual Machine** (`jdk`; GPL 2.0 with Classpath Exception),
-  a virtual machine running Gimli's servers and clients, with an exception of the web app.
+  a virtual machine running Gimli's servers and clients (except for the web app).
   Any distribution of the JVM works, but Gimli mostly uses [Eclipse Temurin](https://adoptium.net/temurin)
   and [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime).
 * **[Kotlin](https://kotlinlang.org)** (`kotlin`; Apache 2.0),
   the multiplatform language Gimli is written in.
 * **[Kotlin Logging](https://github.com/oshai/kotlin-logging)** (`klogging`; Apache 2.0),
   a multiplatform logging library.
+* **[KotlinX Atomicfu](https://github.com/Kotlin/kotlinx-atomicfu)** (`atomicfu`; Apache 2.0),
+  makes atomic operations easier to work with.
 * **[KotlinX Datetime](https://GitHub.com/Kotlin/KotlinX-DateTime)** (`datetime`; Apache 2.0),
   date and time utilities.
-* **[KotlinX Immutable Collections](https://GitHub.com/Kotlin/KotlinX.Collections.Immutable)** (`collections`; Apache
-  2.0),
+* **[KotlinX Immutable Collections](https://GitHub.com/Kotlin/KotlinX.Collections.Immutable)** (`collections`; Apache 2.0),
   safe immutable collections.
 * **[KotlinX Coroutines](https://GitHub.com/Kotlin/KotlinX.Coroutines)** (`coroutines`; Apache 2.0),
   structured concurrency.
@@ -59,17 +62,20 @@ For a list of protocols implemented by Project: Gimli, see [FEDERATION.md](FEDER
   an implementation of the SLF4J API.
 * **[Multiplatform Markdown Renderer](https://github.com/mikepenz/multiplatform-markdown-renderer)** (Apache 2.0),
   a Compose Multiplatform Markdown renderer.
+* **[Okio](https://square.github.io/okio)** (Apache 2.0),
+  an unofficial Kotlin/Multiplatform IO library, to be replaced by the official KotlinX IO.
 * **[OpenMLS](https://openmls.tech)** (MIT),
   an implementation of the Messaging Layer Security protocol written in Rust.
-* **[PGJDBC-NG](https://impossibl.github.io/pgjdbc-ng/)** (`postgres`; Custom),
-  Java Database Connectivity API driver for PostgreSQL.
-  Will be replaced with the official PostgreSQL driver.
+* **[PGJDBC](https://impossibl.github.io/pgjdbc-ng/)** (`postgres`; BSD 2-Clause),
+  The official Java Database Connectivity API driver for PostgreSQL.
 * **[PostgreSQL](https://postgresql.org)** (PostgreSQL License),
   an open source SQL dialect.
 * **[SLF4J](https://slf4j.org)** (MIT),
   a logging API for the JVM, unifying the various logging frameworks it has. Used by Kotlin Logging on the JVM.
 * **[Titanium](https://github.com/filip26/titanium-json-ld)** (`titanium`; Apache 2.0),
   an implementation of JsonLD written in Java.
+* **[Uri KMP](https://github.com/eygraber/uri-kmp)** (`uri`; Apache 2.0)
+  Lightweight URI parser for Kotlin/Multiplatform.
 * **[WebAssembly](https://webassembly.org)** (Apache 2.0),
   a modular virtual machine runnable both standalone and within the browser.
   Gimli's web client compiles to Wasm, and official clients use Wasm libraries via Extism.

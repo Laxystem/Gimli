@@ -3,7 +3,9 @@ plugins {
     kotlin("plugin.serialization")
 }
 
+val ktor: String by project
+
 dependencies {
-    api(project(":api:server"))
-    implementation(project(":server:database"))
+    api(gimliModule(":social:server"))
+    implementation(gimliModule(":server:database"))
 }

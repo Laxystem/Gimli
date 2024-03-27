@@ -1,0 +1,1 @@
+Contains general utilities, and adds KotlinX Serialization support to more classes.

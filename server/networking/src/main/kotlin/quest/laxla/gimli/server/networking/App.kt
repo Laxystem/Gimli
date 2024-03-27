@@ -8,12 +8,13 @@
 
 package quest.laxla.gimli.server.networking
 
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import quest.laxla.gimli.server.networking.webfinger.webfinger
+import io.ktor.http.*
 
-fun main() {
-    embeddedServer(Netty, port = 8080) {
+fun main(vararg urls: String) {
+
+    println(urls.asSequence().map { it to Url(it) }.toMap())
+
+    /*embeddedServer(Netty, port = 8080) {
         webfinger()
-    }.start(wait = true)
+    }.start(wait = true)*/
 }

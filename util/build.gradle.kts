@@ -1,49 +1,43 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("plugin.serialization")
+    gimli
 }
 
 val collections: String by properties
-val coroutines: String by properties
 val datetime: String by properties
 val jdk: String by properties
 val klogging: String by properties
+val ktor: String by properties
 val logback: String by properties
 val serialization: String by properties
+val uri: String by properties
 
 kotlin {
-    applyDefaultHierarchyTemplate()
-    withSourcesJar()
+    jvm()
 
-    @OptIn(ExperimentalKotlinGradlePluginApi::class) compilerOptions {
-        allWarningsAsErrors = true
-        explicitApi = ExplicitApiMode.Strict
-        verbose = true
+    @OptIn(ExperimentalWasmDsl::class) wasmJs {
+        binaries.library()
     }
-
-    jvm {
-        jvmToolchain(jdk.toInt())
-    }
-
-    @OptIn(ExperimentalWasmDsl::class) wasmJs().browser()
 
     sourceSets.commonMain.dependencies {
+        api("com.eygraber:uri-kmp:$uri")
         api("io.github.oshai:kotlin-logging:$klogging")
-        api("org.jetbrains.kotlinx:kotlinx-collections-immutable:$collections")
-        api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines")
         api("org.jetbrains.kotlinx:kotlinx-datetime:$datetime")
-        api("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization")
+        api("org.jetbrains.kotlinx:kotlinx-serialization-core:$serialization")
+        api("org.jetbrains.kotlinx:kotlinx-collections-immutable:$collections")
     }
 
     sourceSets.commonTest.dependencies {
-        api("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines")
+        api(kotlin("test"))
+    }
+
+    sourceSets.jvmTest.dependencies {
+        api(kotlin("test-junit5"))
     }
 
     sourceSets.jvmMain.dependencies {
+        api(kotlin("reflect"))
         runtimeOnly("ch.qos.logback:logback-classic:$logback")
     }
 }
