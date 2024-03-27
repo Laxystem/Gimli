@@ -29,10 +29,15 @@ kotlin {
     }
 
     sourceSets.commonTest.dependencies {
-        implementation(kotlin("test"))
+        api(kotlin("test"))
+    }
+
+    sourceSets.jvmTest.dependencies {
+        api(kotlin("test-junit5"))
     }
 
     sourceSets.jvmMain.dependencies {
+        api(kotlin("reflect"))
         runtimeOnly("ch.qos.logback:logback-classic:$logback")
     }
 }

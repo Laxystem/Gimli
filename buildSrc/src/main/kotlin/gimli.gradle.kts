@@ -19,14 +19,7 @@ version = project.properties["version"]!!
 group = "quest.laxla.gimli"
 
 tasks {
-    val organize: Task by creating
-
-    applyLicenses {
-        dependsOn(organize)
-    }
-
-    create(name = "createReadme") {
-        dependsOn(organize)
+    val createReadme by creating {
 
         val descriptionFile = file(path = "module.md")
         inputs.file(descriptionFile).normalizeLineEndings().optional()
@@ -152,6 +145,15 @@ $artifact
 $subprojects
 """.trimIndent()
         )
+    }
+
+    val organize: Task by creating {
+        dependsOn(applyLicenses)
+        dependsOn(createReadme)
+    }
+
+    withType<Test> {
+        useJUnitPlatform()
     }
 }
 

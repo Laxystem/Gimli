@@ -9,12 +9,6 @@
 package quest.laxla.gimli
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.runBlocking
 
-/**
- * Let main be concurrent!
- */
-internal expect fun execMain(block: suspend CoroutineScope.() -> Unit)
-
-public fun main(vararg params: String): Unit = execMain {
-    InstanceImpl(name = params.firstOrNull() ?: "Gimli Instance ${hashCode()}", extensions)
-}
+internal actual fun execMain(block: suspend CoroutineScope.() -> Unit) = runBlocking(block = block)

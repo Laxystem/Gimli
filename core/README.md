@@ -7,7 +7,7 @@ Defines a concurrent extensions framework, supporting:
 
 * Dynamic loading/unloading
 * Dependency relations
-* Event propagations
+* Event propagation
 * Stateless extensions
 
 ## Artifacts

@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import quest.laxla.gimli.util.OnlyCallableBy
-import quest.laxla.gimli.util.coroutines.withReentrantLock
 
 @OptIn(OnlyCallableBy::class)
 internal class InstanceImpl private constructor(name: String, extensions: Iterable<Extension>) : Instance {
@@ -123,41 +122,46 @@ internal class InstanceImpl private constructor(name: String, extensions: Iterab
 
     override suspend fun getOrThrow(extensionNamespace: String): Extension = scopeOf(extensionNamespace).extension
 
-    private suspend fun shouldLoad(extension: Extension, isDynamicallyTriggered: Boolean): Boolean =
-        mutex.withReentrantLock { mutexKey ->
-            if (status === Instance.Status.Offline) throw UnsupportedOperationException("Instance is offline - cannot load extensions, [${extension.namespace}] included.")
-            if (this contains extension) return@withReentrantLock false
-            if (this contains extension.namespace) throw IncompatibleExtensionSetException("Extension conflict: an extension with namespace [${extension.namespace}] is already loaded.")
+    private suspend fun shouldLoad(extension: Extension, isDynamicallyTriggered: Boolean): Boolean {
+        if (status === Instance.Status.Offline) throw UnsupportedOperationException("Instance is offline - cannot load extensions, [${extension.namespace}] included.")
+        if (this contains extension) return false
+        if (this contains extension.namespace) throw IncompatibleExtensionSetException(
+            extensionNamespace = extension.namespace,
+            message = "Extension conflict: this extension is already loaded."
+        )
 
-            // TODO: dependency check
+        // TODO: dependency check
 
-            val beforeLoad = coroutineScope.async(mutexKey) {
+        val beforeLoad = coroutineScope.async {
+            try {
+                extension.beforeLoad(isDynamicallyTriggered = true, instance = this@InstanceImpl)
+            } catch (e: Throwable) {
+                throw IncompatibleExtensionSetException(
+                    cause = e,
+                    extensionNamespace = extension.namespace,
+                    message = "Loading failed."
+                )
+            }
+        }
+
+        @Suppress("DEPRECATION")
+        awaitAll(*extensions.values.map { dependency -> // TODO: actually filter by dependencies
+            dependency.coroutineScope.async {
                 try {
-                    extension.beforeLoad(isDynamicallyTriggered = true, instance = this@InstanceImpl)
+                    dependency.extension.beforeDependentLoad(extension, isDynamicallyTriggered, scope = dependency)
                 } catch (e: Throwable) {
-                    throw IncompatibleExtensionSetException(
-                        "Encountered an incompatibility when loading extension [${extension.namespace}]",
-                        e
+                    if (e !is CancellationException) throw IncompatibleExtensionSetException(
+                        cause = e,
+                        extensionNamespace = extension.namespace,
+                        raisingExtensionNamespace = dependency.extension.namespace,
+                        message = "Loading failed, extension isn't supported by its dependency."
                     )
                 }
             }
+        }.toTypedArray(), beforeLoad)
 
-            @Suppress("DEPRECATION")
-            awaitAll(*extensions.values.map { dependency -> // TODO: actually filter by dependencies
-                dependency.coroutineScope.async(mutexKey) {
-                    try {
-                        dependency.extension.beforeDependentLoad(extension, isDynamicallyTriggered, scope = dependency)
-                    } catch (e: Throwable) {
-                        if (e !is CancellationException) throw IncompatibleExtensionSetException(
-                            "Loading of [${extension.namespace}] isn't supported by its dependency [${dependency.extension.namespace}]",
-                            e
-                        )
-                    }
-                }
-            }.toTypedArray(), beforeLoad)
-
-            return@withReentrantLock true
-        }
+        return true
+    }
 
     private suspend fun afterLoading(extension: Extension, isDynamicallyTriggered: Boolean) {
         val extensionScope = scopeOf(extension.namespace)
